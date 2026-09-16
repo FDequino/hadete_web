@@ -31,7 +31,7 @@
   'use strict';
 
   var CONFIG = {
-    GA4: '',
+    GA4: 'G-F5VBB23BHT',
     ADS: '',
     ADS_LABEL: '',
     META: '',

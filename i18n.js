@@ -239,7 +239,7 @@ window.I18N = {
       "orig.maptitle": "Zonas de origen en Argentina",
       "orig.cba": "Córdoba",
       "reach.h2": "Dónde estamos y a dónde va este comercio",
-      "reach.lede": "La empresa está en Córdoba, con contactos comerciales en Montevideo, Miami y Kuala Lumpur: los tres puntos unidos por una línea. Los puntos más chicos son mercados que hoy compran aceite de oliva, pasas y poroto mung orgánicos de Argentina. Todavía no llegamos a todos.",
+      "reach.lede": "La empresa está en Córdoba, con contactos comerciales en Montevideo, Miami y Kuala Lumpur: los tres puntos unidos por una línea. Los puntos más chicos son los mercados que compran aceite de oliva, pasas y poroto mung orgánicos de Argentina.",
       "reach.maptitle": "Córdoba, nuestros contactos comerciales y los mercados de estos tres cultivos",
       "reach.r1": "La empresa, documentación y embarques",
       "reach.r2": "Contacto comercial, Mercosur",

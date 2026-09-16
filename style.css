@@ -109,20 +109,35 @@ a{color:inherit}
 .brand,.tools{position:relative;z-index:3}
 /* the switcher sits over a photograph until the header turns solid, so it
    carries its own contrast instead of relying on the image behind it */
-.lang{display:flex;align-items:center;gap:7px;font-size:13px;color:var(--arena);opacity:1}
-.lang span{opacity:.45}
-.lang a{
-  position:relative;padding:2px;color:inherit;text-decoration:none;opacity:.62;
-  line-height:1.15;
+.lang{position:relative;font-size:13px;color:var(--arena)}
+.lang-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  background:none;border:0;padding:4px 2px;margin:0;
+  color:inherit;font:inherit;font-size:13px;letter-spacing:.03em;cursor:pointer;opacity:.82;
   text-shadow:0 1px 8px rgba(35,26,22,.7), 0 0 2px rgba(35,26,22,.5);
-  transition:border-color .2s,opacity .2s;
+  transition:opacity .2s;
 }
-.lang a:hover{opacity:1}
-.lang a.on{opacity:1}
-.lang a.on::after{content:"";position:absolute;left:1px;right:1px;bottom:-4px;height:1px;background:var(--terra)}
+.lang-btn:hover,.lang.open .lang-btn{opacity:1}
+.lang-caret{transition:transform .2s ease}
+.lang.open .lang-caret{transform:rotate(180deg)}
+.lang-menu{
+  position:absolute;top:calc(100% + 10px);right:0;z-index:20;
+  min-width:150px;display:none;flex-direction:column;
+  background:var(--paper);border:1px solid var(--rule);
+  box-shadow:0 12px 34px rgba(35,26,22,.18);
+}
+.lang.open .lang-menu{display:flex}
+.lang-menu a,.lang-menu span{
+  display:block;padding:11px 16px;font-size:13px;line-height:1.2;
+  color:var(--ink-soft);text-decoration:none;white-space:nowrap;
+  transition:background .15s,color .15s;
+}
+.lang-menu a+a,.lang-menu span+a,.lang-menu a+span{border-top:1px solid var(--rule-light,rgba(35,26,22,.06))}
+.lang-menu a:hover{background:rgba(181,112,63,.08);color:var(--negro)}
+.lang-menu .on{color:var(--terra);cursor:default}
 .site.solid .lang{color:var(--negro)}
-.site.solid .lang a{text-shadow:none;opacity:.55}
-.site.solid .lang a.on{opacity:1}
+.site.solid .lang-btn{text-shadow:none;opacity:.72}
+.site.solid .lang-btn:hover,.site.solid .lang.open .lang-btn{opacity:1}
 
 .burger{display:none;background:none;border:0;padding:12px 4px;cursor:pointer}
 .burger span{display:block;width:24px;height:1px;background:var(--arena);margin:6px 0;transition:transform .3s,opacity .3s}
@@ -933,7 +948,8 @@ picture{display:contents}
 
 /* ── objetivos táctiles: 44 px reales sin cambiar el dibujo ── */
 @media (pointer:coarse){
-  .lang a{display:inline-flex;align-items:center;min-height:44px;padding:0 9px;margin:0 -7px}
+  .lang-btn{min-height:44px}
+  .lang-menu a,.lang-menu span{min-height:44px;display:flex;align-items:center}
   .cal-months button{padding:14px 0 13px}
   .social a{min-width:44px;min-height:44px;place-items:center;margin:-4px}
   .foot-nav a{padding:10px 0;margin:-10px 0}

@@ -57,14 +57,40 @@
   (function buildSwitch() {
     var box = document.getElementById('langSwitch');
     if (!box) return;
+    var LANGS = (window.I18N && window.I18N.LANGS) || [{ code: 'en', label: 'EN', name: 'English' }];
     var here = location.pathname.split('/').pop() || 'index.html';
     var clean = here === 'index.html' ? '' : here;   // '' → forma de carpeta, sin index.html
-    var enHref = IS_ES ? '../' + clean : (clean || './');
-    var esHref = IS_ES ? (clean || './') : 'es/' + clean;
+    var up = LANG === 'en' ? '' : '../';              // English lives at root, others under /code/
+    function hrefFor(code) {
+      var sub = code === 'en' ? '' : code + '/';
+      return (up + sub + clean) || './';
+    }
+    var current = LANGS.filter(function (l) { return l.code === LANG; })[0] || LANGS[0];
+
+    var items = LANGS.map(function (l) {
+      if (l.code === LANG) {
+        return '<span class="on" aria-current="true" hreflang="' + l.code + '">' + l.name + '</span>';
+      }
+      return '<a role="menuitem" hreflang="' + l.code + '" href="' + hrefFor(l.code) + '">' + l.name + '</a>';
+    }).join('');
+
     box.innerHTML =
-      '<a href="' + enHref + '"' + (IS_ES ? '' : ' class="on" aria-current="true"') + ' hreflang="en">EN</a>' +
-      '<span aria-hidden="true">/</span>' +
-      '<a href="' + esHref + '"' + (IS_ES ? ' class="on" aria-current="true"' : '') + ' hreflang="es">ES</a>';
+      '<button type="button" class="lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Language">' +
+        '<span class="lang-cur">' + current.label + '</span>' +
+        '<svg class="lang-caret" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">' +
+          '<path d="M2 3.5 5 6.5 8 3.5" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+      '</button>' +
+      '<div class="lang-menu" role="menu">' + items + '</div>';
+
+    var btn = box.querySelector('.lang-btn');
+    function close() { box.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var open = box.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', close);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   })();
 
   /* ── harvest calendar data ────────────────────────────── */

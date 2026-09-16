@@ -57,10 +57,10 @@
   (function buildSwitch() {
     var box = document.getElementById('langSwitch');
     if (!box) return;
-    var path = location.pathname.split('/').pop() || 'index.html';
-    var here = IS_ES ? path : path;
-    var enHref = IS_ES ? '../' + here : here;
-    var esHref = IS_ES ? here : 'es/' + here;
+    var here = location.pathname.split('/').pop() || 'index.html';
+    var clean = here === 'index.html' ? '' : here;   // '' → forma de carpeta, sin index.html
+    var enHref = IS_ES ? '../' + clean : (clean || './');
+    var esHref = IS_ES ? (clean || './') : 'es/' + clean;
     box.innerHTML =
       '<a href="' + enHref + '"' + (IS_ES ? '' : ' class="on" aria-current="true"') + ' hreflang="en">EN</a>' +
       '<span aria-hidden="true">/</span>' +
@@ -304,6 +304,8 @@
     var order = ['mvd', 'mia', 'kul'];
     var track = document.querySelector('.world-track');
     var worldOn = true;
+    /* on phones the map is static: no scroll-jacking, everything drawn at once */
+    var worldStatic = window.matchMedia('(max-width:860px)').matches;
 
     function drawLinks() {
       var b = track.getBoundingClientRect();
@@ -333,7 +335,7 @@
     }
 
     /* the handler only runs while the map is anywhere near the screen */
-    if ('IntersectionObserver' in window) {
+    if (!worldStatic && 'IntersectionObserver' in window) {
       new IntersectionObserver(function (entries) {
         worldOn = entries[0].isIntersecting;
         if (worldOn) drawLinks();
@@ -373,14 +375,24 @@
       wrap.addEventListener('mouseleave', hideTip);
     }
 
-    var wTicking = false;
-    window.addEventListener('scroll', function () {
-      if (!worldOn || wTicking) return;
-      wTicking = true;
-      requestAnimationFrame(function () { drawLinks(); wTicking = false; });
-    }, { passive: true });
-    window.addEventListener('resize', drawLinks);
-    drawLinks();
+    if (worldStatic) {
+      /* draw every route and light every contact at once, no scroll needed */
+      chains.forEach(function (ch) {
+        ch.dots.forEach(function (d) { d.style.opacity = 1; });
+        ch.shown = ch.dots.length;
+      });
+      world.parentNode.classList.add('markets-in');
+      order.forEach(function (k) { if (places[k]) places[k].classList.add('lit'); });
+    } else {
+      var wTicking = false;
+      window.addEventListener('scroll', function () {
+        if (!worldOn || wTicking) return;
+        wTicking = true;
+        requestAnimationFrame(function () { drawLinks(); wTicking = false; });
+      }, { passive: true });
+      window.addEventListener('resize', drawLinks);
+      drawLinks();
+    }
   }
 
   /* ── products come in once, quietly ───────────────────── */
@@ -486,7 +498,8 @@
     try { sessionStorage.setItem('hadete-lang-seen', '1'); } catch (e) {}
     if ((navigator.language || '').slice(0, 2).toLowerCase() !== 'es') return;
     if (document.referrer && document.referrer.indexOf(location.host) > -1) return;
-    var path = location.pathname.split('/').pop() || 'index.html';
-    location.replace('es/' + path + location.search + location.hash);
+    var here = location.pathname.split('/').pop() || 'index.html';
+    var clean = here === 'index.html' ? '' : here;
+    location.replace('es/' + clean + location.search + location.hash);
   })();
 })();

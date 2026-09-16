@@ -591,8 +591,9 @@ form button:hover{background:transparent;color:var(--borra)}
 
 @media (max-width:860px){
   body{font-size:17px}
-  section{padding:clamp(44px,9vw,64px) 0}
+  section{padding:clamp(56px,12vw,76px) 0}
   .head{padding-top:20px}
+  .head p{line-height:1.7}
   .head p{margin-top:16px}
   .primary{
     position:fixed;inset:0 0 auto 0;flex-direction:column;gap:0;
@@ -634,7 +635,8 @@ form button:hover{background:transparent;color:var(--borra)}
   .geo-map{max-width:220px;margin:0 auto 16px}
   .reach-list{grid-template-columns:1fr}
   .reach-list li,.reach-list li+li{padding:16px 0 0;border-left:0}
-  .world-track{height:150vh}
+  .world-track{height:auto;margin-top:clamp(28px,6vw,40px)}
+  .reach .world{position:static;top:auto}
   .world .place text,.world .place.home text{display:none}
   .f-row{grid-template-columns:1fr;gap:26px}
   .docs ul{columns:1}

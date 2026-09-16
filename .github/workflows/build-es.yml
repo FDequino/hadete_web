@@ -1,0 +1,56 @@
+# ============================================================
+#  Regenera /es/ y sitemap.xml cuando cambia el inglés.
+#
+#  Por qué: Hostinger despliega lo que hay en el repo, sin correr
+#  ningún build. Si editás una página en inglés y no corrés
+#  build-es.py, el español queda viejo y nadie se entera.
+#  Esta acción lo corre por vos y commitea el resultado; ese
+#  commit dispara el despliegue de Hostinger.
+# ============================================================
+name: Build ES
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '*.html'
+      - 'i18n.js'
+      - 'build-es.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-es
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # no reaccionar a los commits que hace esta misma acción
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalar dependencias
+        run: pip install beautifulsoup4
+
+      - name: Generar /es/ y sitemap.xml
+        run: python3 build-es.py
+
+      - name: Commitear si algo cambió
+        run: |
+          if [ -z "$(git status --porcelain es sitemap.xml)" ]; then
+            echo "Sin cambios en el español."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add es sitemap.xml
+          git commit -m "build: regenerar /es/ y sitemap"
+          git push

@@ -46,7 +46,10 @@ body{
   margin:0;background:var(--paper);color:var(--negro);
   font-family:var(--serif);font-size:18px;line-height:1.66;
   -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  transition:opacity .34s ease;
 }
+/* fade out before navigating to the portal, so it doesn't flash */
+body.leaving{opacity:0}
 img{max-width:100%;display:block}
 h1,h2,h3,h4{font-weight:400;margin:0;letter-spacing:-.012em}
 p{margin:0}

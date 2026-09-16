@@ -93,6 +93,21 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
   })();
 
+  /* ── leaving for the portal: fade out first, no hard flash ── */
+  (function () {
+    var reduceMo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    Array.prototype.slice.call(document.querySelectorAll('a[href^="https://manage.hadete.com"]'))
+      .forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          if (reduceMo || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;
+          e.preventDefault();
+          var url = link.href;
+          document.body.classList.add('leaving');
+          setTimeout(function () { window.location.href = url; }, 340);
+        });
+      });
+  })();
+
   /* ── harvest calendar data ────────────────────────────── */
   var CAL = {
     months: {

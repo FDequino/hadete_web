@@ -1,3 +1,5 @@
 assets/_source/
 .DS_Store
 hadete-deploy.zip
+.env
+.env.*

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign in — Hadeté</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Private sign-in for Hadeté buyers and staff.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/tinos-latin-400-normal.woff2"/>
+<link rel="preload" as="font" type="font/woff2" crossorigin href="assets/fonts/ibm-plex-mono-latin-400-normal.woff2"/>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="login-page">
+
+<main id="main" class="login-wrap">
+  <div class="login-card">
+    <a class="login-brand" href="index.html" aria-label="Hadeté">
+      <img src="assets/mark-dark.svg" alt="" width="40" height="30">
+      <img src="assets/word-dark.svg" alt="Hadeté" width="130" height="23">
+    </a>
+
+    <h1 data-i18n="lg.h1">Sign in</h1>
+
+    <form id="loginForm" novalidate>
+      <label><span data-i18n="lg.email">Email</span><input type="email" name="email" autocomplete="username" required></label>
+      <label><span data-i18n="lg.pass">Password</span><input type="password" name="password" autocomplete="current-password" required></label>
+      <div class="login-acts">
+        <button type="submit" data-i18n="lg.enter">Sign in</button>
+        <a class="btn-ghost" href="pronto.html" data-i18n="lg.internal">Staff access</a>
+      </div>
+    </form>
+
+    <p class="login-back"><a href="index.html" data-i18n="lg.back">Back to the site</a></p>
+  </div>
+</main>
+
+<script src="i18n.js"></script>
+<script>
+/* Placeholder only — no credentials are checked or sent anywhere.
+   Point the form at your real endpoint when the client area exists. */
+/* No credentials are checked. Until the private area exists, signing in
+   takes you to the construction page. Point the form at the real
+   endpoint and delete this handler when that changes. */
+document.getElementById('loginForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  location.href = 'pronto.html';
+});
+(function () {
+  var saved = null;
+  try { saved = localStorage.getItem('hadete-lang'); } catch (e) {}
+  var q = new URLSearchParams(location.search).get('lang');
+  var lang = q || saved;
+  var dict = window.I18N && window.I18N.DICT && window.I18N.DICT[lang];
+  if (!dict) return;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var v = dict[el.dataset.i18n];
+    if (v) el.textContent = v;
+  });
+})();
+</script>
+</body>
+</html>

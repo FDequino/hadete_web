@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://hadete.com/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hadete.com/"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hadete.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hadete.com/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://hadete.com/es/</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hadete.com/es/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hadete.com/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hadete.com/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://hadete.com/marca.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hadete.com/marca.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hadete.com/es/marca.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hadete.com/marca.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hadete.com/es/marca.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hadete.com/es/marca.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hadete.com/marca.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hadete.com/marca.html"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://hadete.com/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hadete.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hadete.com/es/about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hadete.com/about.html"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://hadete.com/es/about.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hadete.com/es/about.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hadete.com/about.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hadete.com/about.html"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://hadete.com/privacidad.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hadete.com/privacidad.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hadete.com/es/privacidad.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hadete.com/privacidad.html"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://hadete.com/es/privacidad.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hadete.com/es/privacidad.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hadete.com/privacidad.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hadete.com/privacidad.html"/>
+    <priority>0.5</priority>
+  </url>
+</urlset>

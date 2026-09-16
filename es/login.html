@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>Ingresar — Hadeté</title>
+<meta content="noindex,nofollow" name="robots"/>
+<meta content="Acceso privado para compradores y equipo de Hadeté." name="description"/>
+<link href="../favicon.ico" rel="icon" sizes="any"/>
+<link as="font" crossorigin="" href="../assets/fonts/tinos-latin-400-normal.woff2" rel="preload" type="font/woff2">
+<link as="font" crossorigin="" href="../assets/fonts/ibm-plex-mono-latin-400-normal.woff2" rel="preload" type="font/woff2"/>
+<link href="../style.css" rel="stylesheet"/>
+</link><meta content="es_AR" property="og:locale"/><link href="https://hadete.com/es/login.html" hreflang="es" rel="alternate"/><link href="https://hadete.com/login.html" hreflang="en" rel="alternate"/><link href="https://hadete.com/login.html" hreflang="x-default" rel="alternate"/></head>
+<body class="login-page">
+<main class="login-wrap" id="main">
+<div class="login-card">
+<a aria-label="Hadeté" class="login-brand" href="index.html">
+<img alt="" height="30" src="../assets/mark-dark.svg" width="40"/>
+<img alt="Hadeté" height="23" src="../assets/word-dark.svg" width="130"/>
+</a>
+<h1 data-i18n="lg.h1">Ingresar</h1>
+<form id="loginForm" novalidate="">
+<label><span data-i18n="lg.email">Correo</span><input autocomplete="username" name="email" required="" type="email"/></label>
+<label><span data-i18n="lg.pass">Contraseña</span><input autocomplete="current-password" name="password" required="" type="password"/></label>
+<div class="login-acts">
+<button data-i18n="lg.enter" type="submit">Entrar</button>
+<a class="btn-ghost" data-i18n="lg.internal" href="pronto.html">Acceso interno</a>
+</div>
+</form>
+<p class="login-back"><a data-i18n="lg.back" href="index.html">Volver al sitio</a></p>
+</div>
+</main>
+<script src="../i18n.js"></script>
+<script>
+/* Placeholder only — no credentials are checked or sent anywhere.
+   Point the form at your real endpoint when the client area exists. */
+/* No credentials are checked. Until the private area exists, signing in
+   takes you to the construction page. Point the form at the real
+   endpoint and delete this handler when that changes. */
+document.getElementById('loginForm').addEventListener('submit', function (e) {
+  e.preventDefault();
+  location.href = 'pronto.html';
+});
+(function () {
+  var saved = null;
+  try { saved = localStorage.getItem('hadete-lang'); } catch (e) {}
+  var q = new URLSearchParams(location.search).get('lang');
+  var lang = q || saved;
+  var dict = window.I18N && window.I18N.DICT && window.I18N.DICT[lang];
+  if (!dict) return;
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-i18n]').forEach(function (el) {
+    var v = dict[el.dataset.i18n];
+    if (v) el.textContent = v;
+  });
+})();
+</script>
+</body>
+</html>

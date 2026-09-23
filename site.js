@@ -527,6 +527,57 @@
     });
   })();
 
+  /* ── product lines: tabs ──────────────────────────────────
+     Progressive enhancement. The markup ships with every panel
+     visible; here we switch the container into tabbed mode and
+     show one line at a time. Without JS, all nine fichas render. */
+  (function prodTabs() {
+    var wrap = document.querySelector('.products');
+    if (!wrap) return;
+    var tabs = Array.prototype.slice.call(wrap.querySelectorAll('.prod-tab'));
+    var panels = Array.prototype.slice.call(wrap.querySelectorAll('.prod-panel'));
+    if (tabs.length < 2 || !panels.length) return;
+
+    wrap.classList.add('js-tabs');
+
+    function reveal(panel) {
+      /* a panel hidden at load never intersected, so its .prod are still
+         opacity:0 waiting for the reveal observer — light them now */
+      panel.querySelectorAll('.prod.reveal').forEach(function (p) { p.classList.add('in'); });
+    }
+
+    function select(tab, focus) {
+      tabs.forEach(function (t) {
+        var on = t === tab;
+        t.setAttribute('aria-selected', on ? 'true' : 'false');
+        t.tabIndex = on ? 0 : -1;
+      });
+      var line = tab.getAttribute('data-line');
+      panels.forEach(function (p) {
+        var on = p.getAttribute('data-line') === line;
+        p.classList.toggle('is-active', on);
+        p.hidden = !on;
+        if (on) reveal(p);
+      });
+      if (focus) tab.focus();
+    }
+
+    tabs.forEach(function (tab, i) {
+      tab.addEventListener('click', function () { select(tab, false); });
+      tab.addEventListener('keydown', function (e) {
+        var n = null;
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') n = tabs[(i + 1) % tabs.length];
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') n = tabs[(i - 1 + tabs.length) % tabs.length];
+        else if (e.key === 'Home') n = tabs[0];
+        else if (e.key === 'End') n = tabs[tabs.length - 1];
+        if (n) { e.preventDefault(); select(n, true); }
+      });
+    });
+
+    var initial = tabs.filter(function (t) { return t.getAttribute('aria-selected') === 'true'; })[0] || tabs[0];
+    select(initial, false);
+  })();
+
   /* ── boot ─────────────────────────────────────────────── */
   if (hasCal) buildCal();
 

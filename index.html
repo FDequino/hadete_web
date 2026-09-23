@@ -60,6 +60,99 @@
       "name": "Hadeté",
       "publisher": { "@id": "https://hadete.com/#org" },
       "inLanguage": ["en", "es"]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://hadete.com/#product-oliveoil",
+      "name": "Extra virgin olive oil",
+      "brand": { "@id": "https://hadete.com/#org" },
+      "category": "Olive oil",
+      "description": "Cold-extracted extra virgin olive oil, Arauco and Arbequina varieties, from San Juan, La Rioja and Catamarca.",
+      "countryOfOrigin": "AR",
+      "image": "https://hadete.com/assets/r/prod-aceite-900.jpg"
+    },
+    {
+      "@type": "Product",
+      "@id": "https://hadete.com/#product-raisins",
+      "name": "Sun-dried raisins",
+      "brand": { "@id": "https://hadete.com/#org" },
+      "category": "Dried fruit",
+      "description": "Sun-dried raisins, Flame Seedless and Sultanina, dried on the vine in San Juan.",
+      "countryOfOrigin": "AR",
+      "image": "https://hadete.com/assets/r/prod-pasas-900.jpg"
+    },
+    {
+      "@type": "Product",
+      "@id": "https://hadete.com/#product-mungbeans",
+      "name": "Mung beans",
+      "brand": { "@id": "https://hadete.com/#org" },
+      "category": "Pulses",
+      "description": "Organic mung beans, sprouting grade at 92% germination or above, from Salta, Jujuy and Tucumán.",
+      "countryOfOrigin": "AR",
+      "image": "https://hadete.com/assets/r/prod-mung-900.jpg"
+    },
+    {
+      "@type": "Product",
+      "@id": "https://hadete.com/#product-greenolives",
+      "name": "Green olives in brine",
+      "brand": { "@id": "https://hadete.com/#org" },
+      "category": "Olives",
+      "description": "Green olives in brine, Arauco variety, from San Juan.",
+      "countryOfOrigin": "AR",
+      "image": "https://hadete.com/assets/r/prod-aceitunas-900.jpg",
+      "additionalProperty": [{ "@type": "PropertyValue", "name": "HS code", "value": "2005.70" }]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://hadete.com/#product-pecans",
+      "name": "Pecan nuts",
+      "brand": { "@id": "https://hadete.com/#org" },
+      "category": "Nuts",
+      "description": "Pecan nut halves, peeled, moisture held under 5%, from La Rioja.",
+      "countryOfOrigin": "AR",
+      "additionalProperty": [{ "@type": "PropertyValue", "name": "HS code", "value": "0802.12" }]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://hadete.com/#product-alubia",
+      "name": "Alubia beans",
+      "brand": { "@id": "https://hadete.com/#org" },
+      "category": "Pulses",
+      "description": "Alubia white beans, food grade, from Salta, Jujuy and Tucumán.",
+      "countryOfOrigin": "AR",
+      "additionalProperty": [{ "@type": "PropertyValue", "name": "HS code", "value": "0713.33" }]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://hadete.com/#product-paprika",
+      "name": "Smoked paprika",
+      "brand": { "@id": "https://hadete.com/#org" },
+      "category": "Spices",
+      "description": "Smoked paprika with a colour value at or above 120 ASTA, from Argentina.",
+      "countryOfOrigin": "AR",
+      "image": "https://hadete.com/assets/r/prod-pimenton-900.jpg",
+      "additionalProperty": [{ "@type": "PropertyValue", "name": "HS code", "value": "0904.22" }]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://hadete.com/#product-cumin",
+      "name": "Cumin seeds",
+      "brand": { "@id": "https://hadete.com/#org" },
+      "category": "Spices",
+      "description": "Whole cumin seed from Argentina.",
+      "countryOfOrigin": "AR",
+      "additionalProperty": [{ "@type": "PropertyValue", "name": "HS code", "value": "0909.31" }]
+    },
+    {
+      "@type": "Product",
+      "@id": "https://hadete.com/#product-pasta",
+      "name": "Dried pasta",
+      "brand": { "@id": "https://hadete.com/#org" },
+      "category": "Pasta",
+      "description": "Dried pasta, Spaghetti N.5, from Argentina. An industrial line: its guarantee comes from the plant, not from a harvest lot.",
+      "countryOfOrigin": "AR",
+      "image": "https://hadete.com/assets/r/prod-fideos-900.jpg",
+      "additionalProperty": [{ "@type": "PropertyValue", "name": "HS code", "value": "1902.19" }]
     }
   ]
 }
@@ -86,7 +179,7 @@
 </nav>
 <div class="tools">
 <div aria-label="Language" class="lang" id="langSwitch" role="group"></div>
-<a class="login-link" data-i18n="nav.login" href="https://manage.hadete.com">Sign in</a>
+<a class="login-link" data-i18n="nav.login" href="pronto.html">Sign in</a>
 <button aria-controls="primaryNav" aria-expanded="false" aria-label="Menu" class="burger" id="burger">
 <span></span><span></span>
 </button>
@@ -139,9 +232,17 @@
 <section class="products" id="products">
 <div class="shell">
 <div class="head split">
-<h2 data-i18n="prod.h2">Three crops</h2>
-<p data-i18n="prod.lede">All three come from growers and plants working under Argentina's national organic framework, Law 25.127, audited by SENASA. Every lot leaves with its certificate of analysis and its organic transaction certificate.</p>
+<h2 data-i18n="prod.h2">The portfolio</h2>
+<p data-i18n="prod.lede">Eight are crops from growers and plants working under Argentina's national organic framework, Law 25.127, audited by SENASA; every lot leaves with its certificate of analysis and its organic transaction certificate. The pasta is an industrial line, kept apart.</p>
 </div>
+<div class="prod-tabs" role="tablist" aria-label="Product lines">
+<button type="button" class="prod-tab" role="tab" id="tab-oils" aria-controls="panel-oils" aria-selected="true" data-line="oils" data-i18n="line.oils">Olives &amp; oils</button>
+<button type="button" class="prod-tab" role="tab" id="tab-nuts" aria-controls="panel-nuts" aria-selected="false" tabindex="-1" data-line="nuts" data-i18n="line.nuts">Nuts &amp; dried</button>
+<button type="button" class="prod-tab" role="tab" id="tab-pulses" aria-controls="panel-pulses" aria-selected="false" tabindex="-1" data-line="pulses" data-i18n="line.pulses">Pulses</button>
+<button type="button" class="prod-tab" role="tab" id="tab-spices" aria-controls="panel-spices" aria-selected="false" tabindex="-1" data-line="spices" data-i18n="line.spices">Spices</button>
+<button type="button" class="prod-tab prod-tab--industrial" role="tab" id="tab-industrial" aria-controls="panel-industrial" aria-selected="false" tabindex="-1" data-line="industrial" data-i18n="line.industrial">Industrialised</button>
+</div>
+<div class="prod-panel is-active" id="panel-oils" role="tabpanel" aria-labelledby="tab-oils" data-line="oils" tabindex="0">
 <article class="prod" data-prod="p1">
 <figure><picture><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-aceite-440.avif 440w, assets/r/prod-aceite-700.avif 700w, assets/r/prod-aceite-900.avif 900w" type="image/avif"/><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-aceite-440.webp 440w, assets/r/prod-aceite-700.webp 700w, assets/r/prod-aceite-900.webp 900w" type="image/webp"/><img alt="Bottle of Hadeté extra virgin olive oil" decoding="async" height="900" loading="lazy" sizes="(max-width:1040px) 100vw, 48vw" src="assets/r/prod-aceite-900.jpg" srcset="assets/r/prod-aceite-440.jpg 440w, assets/r/prod-aceite-700.jpg 700w, assets/r/prod-aceite-900.jpg 900w" width="900"/></picture></figure>
 <div class="prod-txt">
@@ -158,6 +259,20 @@
 </dl>
 </div>
 </article>
+<article class="prod" data-prod="p4">
+<figure><picture><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-aceitunas-440.avif 440w, assets/r/prod-aceitunas-700.avif 700w, assets/r/prod-aceitunas-900.avif 900w" type="image/avif"/><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-aceitunas-440.webp 440w, assets/r/prod-aceitunas-700.webp 700w, assets/r/prod-aceitunas-900.webp 900w" type="image/webp"/><img alt="Jar of Hadeté green olives in brine" decoding="async" height="1125" loading="lazy" sizes="(max-width:1040px) 100vw, 48vw" src="assets/r/prod-aceitunas-900.jpg" srcset="assets/r/prod-aceitunas-440.jpg 440w, assets/r/prod-aceitunas-700.jpg 700w, assets/r/prod-aceitunas-900.jpg 900w" width="900"/></picture></figure>
+<div class="prod-txt">
+<h3 data-i18n="p4.name">Green olives in brine</h3>
+<p class="latin"><em>Olea europaea</em> <span>Arauco</span></p>
+<p class="prod-note" data-i18n="p4.note">Arauco, the same olive as our oil, cured whole in brine in San Juan.</p>
+<dl class="spec">
+<div><dt data-i18n="l.origin">Origin</dt><dd>San Juan</dd></div>
+<div><dt data-i18n="l.retail">Packed</dt><dd>350 g</dd></div>
+</dl>
+</div>
+</article>
+</div>
+<div class="prod-panel" id="panel-nuts" role="tabpanel" aria-labelledby="tab-nuts" data-line="nuts" tabindex="0">
 <article class="prod" data-prod="p2">
 <figure><picture><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-pasas-440.avif 440w, assets/r/prod-pasas-700.avif 700w, assets/r/prod-pasas-900.avif 900w" type="image/avif"/><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-pasas-440.webp 440w, assets/r/prod-pasas-700.webp 700w, assets/r/prod-pasas-900.webp 900w" type="image/webp"/><img alt="Pouch of Hadeté sun-dried raisins" decoding="async" height="900" loading="lazy" sizes="(max-width:1040px) 100vw, 48vw" src="assets/r/prod-pasas-900.jpg" srcset="assets/r/prod-pasas-440.jpg 440w, assets/r/prod-pasas-700.jpg 700w, assets/r/prod-pasas-900.jpg 900w" width="900"/></picture></figure>
 <div class="prod-txt">
@@ -174,6 +289,22 @@
 </dl>
 </div>
 </article>
+<article class="prod" data-prod="p5">
+<figure><picture><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-pecan-440.avif 440w, assets/r/prod-pecan-700.avif 700w, assets/r/prod-pecan-900.avif 900w" type="image/avif"/><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-pecan-440.webp 440w, assets/r/prod-pecan-700.webp 700w, assets/r/prod-pecan-900.webp 900w" type="image/webp"/><img alt="Pouch of Hadeté pecan nuts" decoding="async" height="1125" loading="lazy" sizes="(max-width:1040px) 100vw, 48vw" src="assets/r/prod-pecan-900.jpg" srcset="assets/r/prod-pecan-440.jpg 440w, assets/r/prod-pecan-700.jpg 700w, assets/r/prod-pecan-900.jpg 900w" width="900"/></picture></figure>
+<div class="prod-txt">
+<h3 data-i18n="p5.name">Pecan nuts</h3>
+<p class="latin"><em>Carya illinoinensis</em></p>
+<p class="prod-note" data-i18n="p5.note">Halves rather than pieces, peeled, moisture held under 5% so they keep. From La Rioja groves.</p>
+<dl class="spec">
+<div><dt data-i18n="l.origin">Origin</dt><dd>La Rioja</dd></div>
+<div><dt data-i18n="l.form">Form</dt><dd data-i18n="p5.form">Halves, peeled</dd></div>
+<div><dt data-i18n="l.moisture">Moisture</dt><dd>≤ 5 %</dd></div>
+<div><dt data-i18n="l.retail">Packed</dt><dd>500 g</dd></div>
+</dl>
+</div>
+</article>
+</div>
+<div class="prod-panel" id="panel-pulses" role="tabpanel" aria-labelledby="tab-pulses" data-line="pulses" tabindex="0">
 <article class="prod" data-prod="p3">
 <figure><picture><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-mung-440.avif 440w, assets/r/prod-mung-700.avif 700w, assets/r/prod-mung-900.avif 900w" type="image/avif"/><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-mung-440.webp 440w, assets/r/prod-mung-700.webp 700w, assets/r/prod-mung-900.webp 900w" type="image/webp"/><img alt="Bag of Hadeté organic mung beans" decoding="async" height="900" loading="lazy" sizes="(max-width:1040px) 100vw, 48vw" src="assets/r/prod-mung-900.jpg" srcset="assets/r/prod-mung-440.jpg 440w, assets/r/prod-mung-700.jpg 700w, assets/r/prod-mung-900.jpg 900w" width="900"/></picture></figure>
 <div class="prod-txt">
@@ -190,6 +321,62 @@
 </dl>
 </div>
 </article>
+<article class="prod" data-prod="p6">
+<figure><picture><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-alubia-440.avif 440w, assets/r/prod-alubia-700.avif 700w, assets/r/prod-alubia-900.avif 900w" type="image/avif"/><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-alubia-440.webp 440w, assets/r/prod-alubia-700.webp 700w, assets/r/prod-alubia-900.webp 900w" type="image/webp"/><img alt="Pouch of Hadeté alubia beans" decoding="async" height="1125" loading="lazy" sizes="(max-width:1040px) 100vw, 48vw" src="assets/r/prod-alubia-900.jpg" srcset="assets/r/prod-alubia-440.jpg 440w, assets/r/prod-alubia-700.jpg 700w, assets/r/prod-alubia-900.jpg 900w" width="900"/></picture></figure>
+<div class="prod-txt">
+<h3 data-i18n="p6.name">Alubia beans</h3>
+<p class="latin"><em>Phaseolus vulgaris</em></p>
+<p class="prod-note" data-i18n="p6.note">The white bean Argentina exports by the shipload: food grade, from the northwest.</p>
+<dl class="spec">
+<div><dt data-i18n="l.origin">Origin</dt><dd>Salta, Jujuy, Tucumán</dd></div>
+<div><dt data-i18n="l.grade">Grade</dt><dd data-i18n="p6.grade">Food grade</dd></div>
+<div><dt data-i18n="l.retail">Packed</dt><dd>500 g</dd></div>
+</dl>
+</div>
+</article>
+</div>
+<div class="prod-panel" id="panel-spices" role="tabpanel" aria-labelledby="tab-spices" data-line="spices" tabindex="0">
+<article class="prod" data-prod="p7">
+<figure><picture><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-pimenton-440.avif 440w, assets/r/prod-pimenton-700.avif 700w, assets/r/prod-pimenton-900.avif 900w" type="image/avif"/><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-pimenton-440.webp 440w, assets/r/prod-pimenton-700.webp 700w, assets/r/prod-pimenton-900.webp 900w" type="image/webp"/><img alt="Jar of Hadeté smoked paprika" decoding="async" height="1125" loading="lazy" sizes="(max-width:1040px) 100vw, 48vw" src="assets/r/prod-pimenton-900.jpg" srcset="assets/r/prod-pimenton-440.jpg 440w, assets/r/prod-pimenton-700.jpg 700w, assets/r/prod-pimenton-900.jpg 900w" width="900"/></picture></figure>
+<div class="prod-txt">
+<h3 data-i18n="p7.name">Smoked paprika</h3>
+<p class="latin"><em>Capsicum annuum</em></p>
+<p class="prod-note" data-i18n="p7.note">Smoked, with a colour value at or above 120 ASTA — the number a buyer checks first.</p>
+<dl class="spec">
+<div><dt data-i18n="l.origin">Origin</dt><dd>Argentina</dd></div>
+<div><dt data-i18n="l.colour">Colour value</dt><dd>≥ 120 ASTA</dd></div>
+<div><dt data-i18n="l.retail">Packed</dt><dd>100 g</dd></div>
+</dl>
+</div>
+</article>
+<article class="prod" data-prod="p8">
+<figure><picture><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-comino-440.avif 440w, assets/r/prod-comino-700.avif 700w, assets/r/prod-comino-900.avif 900w" type="image/avif"/><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-comino-440.webp 440w, assets/r/prod-comino-700.webp 700w, assets/r/prod-comino-900.webp 900w" type="image/webp"/><img alt="Jar of Hadeté cumin seeds" decoding="async" height="1125" loading="lazy" sizes="(max-width:1040px) 100vw, 48vw" src="assets/r/prod-comino-900.jpg" srcset="assets/r/prod-comino-440.jpg 440w, assets/r/prod-comino-700.jpg 700w, assets/r/prod-comino-900.jpg 900w" width="900"/></picture></figure>
+<div class="prod-txt">
+<h3 data-i18n="p8.name">Cumin seeds</h3>
+<p class="latin"><em>Cuminum cyminum</em></p>
+<p class="prod-note" data-i18n="p8.note">Whole seed from Argentina. Full specification travels with the certificate of analysis.</p>
+<dl class="spec">
+<div><dt data-i18n="l.origin">Origin</dt><dd>Argentina</dd></div>
+<div><dt data-i18n="l.retail">Packed</dt><dd>100 g</dd></div>
+</dl>
+</div>
+</article>
+</div>
+<div class="prod-panel prod-panel--industrial" id="panel-industrial" role="tabpanel" aria-labelledby="tab-industrial" data-line="industrial" tabindex="0">
+<p class="prod-panel-note" data-i18n="line.industrial.note">Everything else here is a crop, traceable to a field and a harvest lot. The pasta is manufactured: its guarantee comes from the plant that makes it, not from origin.</p>
+<article class="prod prod--industrial" data-prod="p9">
+<figure><picture><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-fideos-440.avif 440w, assets/r/prod-fideos-700.avif 700w, assets/r/prod-fideos-900.avif 900w" type="image/avif"/><source sizes="(max-width:1040px) 100vw, 48vw" srcset="assets/r/prod-fideos-440.webp 440w, assets/r/prod-fideos-700.webp 700w, assets/r/prod-fideos-900.webp 900w" type="image/webp"/><img alt="Box of Hadeté dried pasta, Spaghetti N.5" decoding="async" height="1125" loading="lazy" sizes="(max-width:1040px) 100vw, 48vw" src="assets/r/prod-fideos-900.jpg" srcset="assets/r/prod-fideos-440.jpg 440w, assets/r/prod-fideos-700.jpg 700w, assets/r/prod-fideos-900.jpg 900w" width="900"/></picture></figure>
+<div class="prod-txt">
+<h3 data-i18n="p9.name">Dried pasta</h3>
+<p class="prod-note" data-i18n="p9.note">An industrial line, not a crop. Spaghetti N.5, dried at the plant — its guarantee comes from the mill, not from a harvest lot.</p>
+<dl class="spec">
+<div><dt data-i18n="l.origin">Origin</dt><dd>Argentina</dd></div>
+<div><dt data-i18n="l.cut">Cut</dt><dd>Spaghetti N.5</dd></div>
+<div><dt data-i18n="l.retail">Packed</dt><dd>500 g</dd></div>
+</dl>
+</div>
+</article>
+</div>
 </div>
 </section>
 <section class="formats" id="formats">
@@ -452,9 +639,15 @@
 <label><span data-i18n="f.port">Country and destination port</span><input name="port" type="text"/></label>
 <label class="sel"><span data-i18n="f.product">Product</span>
 <select name="product">
-<option data-i18n="f.o1">Extra virgin olive oil</option>
-<option data-i18n="f.o2">Sun-dried raisins</option>
-<option data-i18n="f.o3">Mung beans</option>
+<option data-i18n="p1.name">Extra virgin olive oil</option>
+<option data-i18n="p4.name">Green olives in brine</option>
+<option data-i18n="p2.name">Sun-dried raisins</option>
+<option data-i18n="p5.name">Pecan nuts</option>
+<option data-i18n="p3.name">Mung beans</option>
+<option data-i18n="p6.name">Alubia beans</option>
+<option data-i18n="p7.name">Smoked paprika</option>
+<option data-i18n="p8.name">Cumin seeds</option>
+<option data-i18n="p9.name">Dried pasta</option>
 <option data-i18n="f.o4">More than one</option>
 </select>
 </label>
@@ -516,7 +709,7 @@
 <a data-i18n="nav.harvest" href="./#harvest">Harvest</a>
 <a data-i18n="nav.about" href="about.html">About us</a>
 <a data-i18n="nav.contact" href="./#contact">Contact</a>
-<a data-i18n="nav.login" href="https://manage.hadete.com">Sign in</a>
+<a data-i18n="nav.login" href="pronto.html">Sign in</a>
 <a data-i18n="nav.privacy" href="privacidad.html">Privacy</a>
 </nav>
 <ul aria-label="Social" class="social">

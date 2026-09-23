@@ -9,7 +9,7 @@ about.html      Nosotros — institucional, granel / marca propia / marca Hadet�
 style.css       paleta y tipografía del manual de marca
 i18n.js         idiomas (ver abajo)
 site.js         header, menú, idioma, calendario, mapas, animaciones
-analytics.js    GA4, Google Ads, Meta Pixel, LinkedIn — con los IDs vacíos
+analytics.js    GA4, Google Ads, Meta Pixel, LinkedIn — GA4 cargado, el resto vacío
 assets/         fotos y logos en SVG
 robots.txt · sitemap.xml
 favicon* · og-image.jpg · site.webmanifest   → van en la raíz del dominio
@@ -70,6 +70,26 @@ conversión, el píxel de Meta y LinkedIn. Lo que está vacío no carga.
   y `contact_email` en cualquier mailto. Esos tres son los que hay que optimizar.
 - **Enhanced conversions**: el correo del formulario se pasa a Google para que pueda
   emparejar el lead. Requiere activarlo también del lado de la cuenta de Ads.
+
+### De dónde sale cada ID y qué pasa si falta
+
+Los cinco viven en el bloque `CONFIG` arriba de `analytics.js`. Hoy solo `GA4` está
+cargado; los otros cuatro están vacíos a propósito, listos para pegar el valor. Lo que
+quede vacío no carga su script, así que el sitio sigue liviano.
+
+| Campo | Formato | De dónde se saca | Qué pasa si queda vacío |
+|---|---|---|---|
+| `GA4` | `G-XXXXXXXXXX` | GA4 → Administrar → Flujos de datos → tu flujo web → *ID de medición* | **Ya cargado** (`G-F5VBB23BHT`). Sin él no hay analítica de tráfico y, como es el único ID activo, tampoco aparece el cartel de consentimiento. |
+| `ADS` | `AW-XXXXXXXXX` | Google Ads → arriba a la derecha, el ID de cuenta con prefijo `AW-` (o Herramientas → Conversiones) | No carga la etiqueta de Ads: sin remarketing ni conversiones de Ads. GA4 sigue midiendo. |
+| `ADS_LABEL` | `AW-XXXXXXXXX/AbCdEfGh` | Google Ads → Conversiones → acción "Lead / envío de formulario" → *Configurar etiqueta* → **Etiqueta de conversión** (se pega junto al `AW-` con la barra) | **El más caro de dejar vacío.** Aunque `ADS` esté cargado, no se registra NINGUNA conversión de Ads, y sin conversiones el Smart Bidding no puede optimizar: se queda sin la señal que le dice qué clic vale. |
+| `META` | 15–16 dígitos | Meta Events Manager → Orígenes de datos → tu píxel → Configuración → *ID del conjunto/píxel* | No carga el píxel: sin eventos `Lead`/`Contact` en Meta ni públicos de remarketing. |
+| `LINKEDIN` | ~7 dígitos | LinkedIn Campaign Manager → Analizar → Insight Tag → *Partner ID* | No carga el Insight Tag: sin conversiones ni audiencias en LinkedIn. |
+
+Los eventos de contacto se disparan al `dataLayer` apenas ocurren, pero **solo se
+transmiten después de que el visitante acepta** (Consent Mode v2). Verificado en el
+navegador: enviar el formulario dispara `generate_lead` con el producto elegido, y un
+clic en cualquier `mailto:` dispara `contact_email`. Son las dos conversiones reales del
+sitio; `contact_whatsapp` es la tercera, en el botón flotante.
 
 ## Imágenes
 

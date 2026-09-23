@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
+Disallow: /login.html
+Disallow: /pronto.html
+Disallow: /es/login.html
+Disallow: /es/pronto.html
 
 Sitemap: https://hadete.com/sitemap.xml

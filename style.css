@@ -80,6 +80,11 @@ a{color:inherit}
    ============================================================ */
 .site{
   position:fixed;top:0;left:0;right:0;z-index:100;
+  /* tinted-glass scrim over the hero: keeps the light logo/nav legible on any
+     photograph (and if the photo fails to load) — arena text clears 4.5:1
+     against this backgroundColor instead of falling through to the paper body */
+  background:rgba(63,27,37,.88);
+  -webkit-backdrop-filter:saturate(120%) blur(6px);backdrop-filter:saturate(120%) blur(6px);
   transition:background .35s ease,border-color .35s ease,transform .4s cubic-bezier(.3,.7,.3,1);
   border-bottom:1px solid transparent;
 }
@@ -89,7 +94,7 @@ a{color:inherit}
 .brand .mark{height:30px;width:auto}
 .brand .word{height:19px;width:auto;display:block}
 .brand .dark{display:none}
-.site.solid{background:#F7F3EC;border-bottom-color:var(--rule)}
+.site.solid{background:#F7F3EC;border-bottom-color:var(--rule);-webkit-backdrop-filter:none;backdrop-filter:none}
 .site.solid .brand .light{display:none}
 .site.solid .brand .dark{display:block}
 
@@ -265,7 +270,7 @@ section{padding:clamp(56px,6.5vw,96px) 0}
   margin-top:34px;font-size:15px;color:var(--borra);
   padding-left:16px;border-left:2px solid var(--terra);min-height:1.7em;
 }
-.cal-note{margin-top:18px;font-size:12.5px;color:var(--ink-soft);max-width:60ch;opacity:.8}
+.cal-note{margin-top:18px;font-size:12.5px;color:var(--ink-soft);max-width:60ch}
 
 /* ============================================================
    PRODUCTS — the photo holds, the text scrolls past, sides alternate
@@ -273,7 +278,7 @@ section{padding:clamp(56px,6.5vw,96px) 0}
 .products .shell{overflow:visible}
 .prod{
   display:grid;grid-template-columns:1fr 1.02fr;gap:clamp(36px,6vw,84px);
-  align-items:center;padding:clamp(48px,7vw,96px) 0;
+  align-items:start;padding:clamp(48px,7vw,96px) 0;
 }
 .prod.reveal{opacity:0;transform:translateY(18px)}
 .prod.reveal.in{opacity:1;transform:none;transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.3,1)}
@@ -285,7 +290,7 @@ section{padding:clamp(56px,6.5vw,96px) 0}
   aspect-ratio:4/5;max-height:560px;
 }
 .prod figure img{width:100%;height:100%;object-fit:cover}
-.prod-txt{padding:clamp(4px,1vh,16px) 0 0;align-self:center}
+.prod-txt{padding:0;align-self:start}
 
 
 .prod h3{font-size:clamp(28px,3.2vw,40px);color:var(--borra);line-height:1.1}
@@ -300,6 +305,60 @@ section{padding:clamp(56px,6.5vw,96px) 0}
 .spec dt{margin:0;font-size:12px;color:var(--ink-soft);padding-top:2px}
 .spec dd{margin:0;font-size:13.5px;color:var(--negro)}
 
+/* ── product lines: tabs (progressive enhancement) ──────────
+   Without JS the tablist is hidden and every panel shows, so the
+   whole portfolio is in the page and indexable. site.js adds
+   .js-tabs, which turns on the tabs and hides the inactive panels. */
+.prod-tabs{display:none}
+.products.js-tabs .prod-tabs{
+  display:flex;flex-wrap:wrap;align-items:flex-end;
+  gap:clamp(14px,2.4vw,30px);margin:clamp(30px,4vw,48px) 0 0;
+  border-bottom:1px solid var(--rule);
+}
+.prod-tab{
+  font-family:var(--serif);font-size:clamp(15px,1.5vw,17px);line-height:1.2;
+  background:none;border:0;border-bottom:2px solid transparent;margin:0;
+  padding:10px 2px;cursor:pointer;color:var(--ink-soft);
+  transition:color .2s,border-color .2s;
+}
+.prod-tab:hover{color:var(--borra)}
+.prod-tab[aria-selected="true"]{color:var(--borra);border-bottom-color:var(--terra)}
+.prod-tab:focus-visible{outline:2px solid var(--terra);outline-offset:3px}
+/* the industrial line reads as separate from the eight origin crops */
+.prod-tab--industrial{margin-left:auto;position:relative}
+.prod-tab--industrial::before{
+  content:"";position:absolute;left:calc(-1 * clamp(7px,1.2vw,15px));top:22%;bottom:22%;
+  width:1px;background:var(--rule);
+}
+.products.js-tabs .prod-panel{display:none}
+.products.js-tabs .prod-panel.is-active{display:block}
+/* Keyframe animations (not transitions) so they replay every time a panel is
+   shown from display:none. The photo eases in first, the text a beat later, for
+   a soft staggered entrance. The reduced-motion block below neutralises them. */
+.products.js-tabs .prod-panel.is-active .prod>figure{animation:prodItemIn 1s cubic-bezier(.42,0,.58,1) both}
+.products.js-tabs .prod-panel.is-active .prod-txt{animation:prodItemIn 1s cubic-bezier(.42,0,.58,1) .18s both}
+.products.js-tabs .prod-panel.is-active .prod-panel-note{animation:prodItemIn .9s cubic-bezier(.42,0,.58,1) both}
+@keyframes prodItemIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.prod-panel-note{
+  margin:clamp(28px,4vw,44px) 0 0;font-size:14px;font-style:italic;
+  color:var(--ink-soft);max-width:60ch;
+}
+/* when a note introduces the panel it already provides the top separation,
+   so the product below it doesn't need its full opening gap */
+.prod-panel-note + .prod{margin-top:0;padding-top:clamp(20px,3vw,36px)}
+
+/* fichas without a photograph yet: a specimen label, not a broken image */
+.prod .prod-figure--pending{
+  margin:0;display:flex;align-items:center;justify-content:center;
+  background:var(--borra);aspect-ratio:4/5;max-height:560px;overflow:hidden;
+}
+.prod .prod-figure--industrial{background:var(--negro)}
+.prod-specimen{
+  font-family:var(--serif);font-style:italic;color:var(--arena);
+  font-size:clamp(22px,2.6vw,32px);text-align:center;padding:0 24px;opacity:.92;
+}
+.prod-figure--industrial .prod-specimen{font-style:normal;letter-spacing:.02em}
+
 /* ============================================================
    ORIGIN
    ============================================================ */
@@ -313,14 +372,14 @@ section{padding:clamp(56px,6.5vw,96px) 0}
   stroke-linejoin:round;
 }
 .geo-map .base circle{fill:var(--borra);opacity:.35}
-.geo-map .base text{font-family:var(--mono);font-size:10px;fill:var(--ink-soft);opacity:.5}
+.geo-map .base text{font-family:var(--mono);font-size:10px;fill:var(--ink-soft);opacity:.7}
 
 .geo-map .pin .halo{fill:var(--terra);opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.4);transition:opacity .5s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
 .geo-map .pin .ring{fill:none;stroke:var(--terra);stroke-width:1;opacity:0;transform-box:fill-box;transform-origin:center;transform:scale(.5);transition:opacity .45s ease,transform .5s cubic-bezier(.2,.7,.3,1)}
 .geo-map .pin .dot{fill:var(--borra);opacity:.35;transition:fill .35s ease,opacity .35s ease}
 .geo-map .pin .tag{
   font-family:var(--serif);font-size:19px;fill:var(--borra);
-  opacity:0;transition:opacity .45s ease;
+  transition:opacity .45s ease;
 }
 .geo-map .pin.on .halo{opacity:.1;transform:none}
 .geo-map .pin.on .ring{opacity:.7;transform:none}
@@ -328,17 +387,17 @@ section{padding:clamp(56px,6.5vw,96px) 0}
 .geo-map .pin.on .tag{opacity:1}
 
 .geo-list{display:grid}
-.region{padding:clamp(26px,3vw,38px) 0;border-top:1px solid var(--rule);min-height:64vh;display:flex;flex-direction:column;justify-content:center;transition:opacity .45s ease}
-.region:not(.on){opacity:.42}
+.region{padding:clamp(26px,3vw,38px) 0;border-top:1px solid var(--rule);min-height:42vh;display:flex;flex-direction:column;justify-content:center;transition:opacity .45s ease}
+.region:not(.on){opacity:.8}
 .region:last-child{border-bottom:1px solid var(--rule)}
 .region:focus{outline:0}
 .region:focus-visible{outline:2px solid var(--terra);outline-offset:8px}
 .region h3{font-size:clamp(28px,2.6vw,36px);color:var(--borra);line-height:1.12}
-.region .amp{color:var(--terra)}
+.region .amp{color:#8E5227}
 .region p{margin-top:18px;font-size:clamp(18px,1.5vw,20px);color:var(--ink-soft);max-width:50ch;line-height:1.62}
 .region dl{margin:22px 0 0;display:flex;flex-wrap:wrap;gap:8px 40px}
 .region dl>div{display:flex;flex-direction:column;gap:3px}
-.region dt{font-size:12px;color:var(--ink-soft);opacity:.75}
+.region dt{font-size:12px;color:var(--ink-soft)}
 .region dd{margin:0;font-size:14.5px;color:var(--borra)}
 
 .wide{margin:clamp(56px,7vw,96px) 0 0}
@@ -404,7 +463,7 @@ section{padding:clamp(56px,6.5vw,96px) 0}
 /* ============================================================
    REACH — world map, the links draw as you scroll
    ============================================================ */
-.world-track{margin:clamp(40px,5vw,64px) 0 0;height:185vh;position:relative}
+.world-track{margin:clamp(40px,5vw,64px) 0 0;height:125vh;position:relative}
 .world{position:sticky;top:15vh;contain:layout paint}
 .world .world-land{position:absolute;inset:0;width:100%;height:auto;pointer-events:none;transform:translateZ(0)}
 .world .world-live{position:relative;width:100%;height:auto;display:block}
@@ -428,7 +487,7 @@ section{padding:clamp(56px,6.5vw,96px) 0}
 }
 .world.markets-in .markets circle{opacity:.6;transform:none}
 .world .markets circle:hover{fill:var(--terra);stroke:var(--terra);opacity:1}
-.world .place .dot{fill:var(--terra);opacity:0;transition:opacity .5s ease}
+.world .place .dot{fill:var(--terra);transition:opacity .5s ease}
 .world .place.home .dot{fill:var(--borra);opacity:1}
 .world .place .ring{
   fill:none;stroke:var(--terra);stroke-width:1;opacity:0;
@@ -439,10 +498,15 @@ section{padding:clamp(56px,6.5vw,96px) 0}
 .world .place.lit .ring{opacity:.55;transform:none}
 .world .place text{
   font-family:var(--mono);font-size:11px;fill:var(--borra);
-  opacity:0;transition:opacity .5s ease;
+  transition:opacity .5s ease;
 }
 .world .place.home text{opacity:.85}
 .world .place.lit text{opacity:.85}
+
+/* Map labels (province and contact names) and their dots are content, not
+   decoration: they stay visible at all times. The scroll emphasis is carried by
+   the pin (dot fill, ring and halo), which animate on .on/.lit — never by
+   hiding the names, so nothing here waits on JavaScript. */
 
 .map-key{
   list-style:none;margin:26px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:12px 30px;
@@ -532,9 +596,9 @@ form button:hover{background:transparent;color:var(--borra)}
 .social svg{fill:currentColor}
 .foot-legal{
   margin-top:clamp(28px,3vw,40px);padding-top:20px;border-top:1px solid var(--rule-light);
-  font-family:var(--mono);font-size:11.5px;color:rgba(237,228,214,.55);
+  font-family:var(--mono);font-size:11.5px;color:rgba(237,228,214,.7);
 }
-.foot-legal .amp{color:var(--terra)}
+.foot-legal .amp{color:inherit}
 
 /* ============================================================
    ABOUT PAGE
@@ -874,7 +938,7 @@ picture{display:contents}
 .foot-brand{text-decoration:none;display:inline-block}
 .foot-tag{
   font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;
-  color:rgba(237,228,214,.55);margin-top:9px;text-decoration:none;
+  color:rgba(237,228,214,.7);margin-top:9px;text-decoration:none;
 }
 
 .login-acts{display:flex;flex-wrap:wrap;align-items:stretch;gap:10px;margin-top:8px}

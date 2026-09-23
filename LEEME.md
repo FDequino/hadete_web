@@ -1,19 +1,34 @@
 # hadete.com — sitio
 
-Dos páginas, sin build, sin dependencias. Se sube tal cual a cualquier hosting
-estático: Netlify, Vercel, Cloudflare Pages, GitHub Pages o un FTP común.
+Sitio estático multipágina. El inglés vive en la raíz y el español en `/es/`; el
+único build es `build-es.py` (regenera `/es/` y el sitemap desde el inglés; requiere
+`beautifulsoup4`). Se sirve desde Hostinger detrás de Cloudflare.
 
 ```
-index.html      home
-about.html      Nosotros — institucional, granel / marca propia / marca Hadeté
-style.css       paleta y tipografía del manual de marca
-i18n.js         idiomas (ver abajo)
-site.js         header, menú, idioma, calendario, mapas, animaciones
-analytics.js    GA4, Google Ads, Meta Pixel, LinkedIn — GA4 cargado, el resto vacío
-assets/         fotos y logos en SVG
+index.html       home — portafolio de 9 productos (pestañas por línea), formatos,
+                 cosecha, origen, alcance, contacto
+marca.html       La marca Hadeté — línea fraccionada (9)
+about.html       Nosotros — granel / marca propia / marca Hadeté
+privacidad.html  política de privacidad
+login.html       formulario de acceso (huérfano; "Ingresar" apunta a pronto.html)
+pronto.html      área privada en construcción
+404.html
+style.css        paleta y tipografía del manual de marca
+i18n.js          idiomas (ver abajo)
+site.js          header, menú, idioma, calendario, mapas, pestañas, animaciones
+analytics.js     GA4, Google Ads, Meta Pixel, LinkedIn — GA4 cargado, el resto vacío
+assets/          fotos responsive (r/), originales (_source/, gitignored), logos SVG
+es/              versiones en español (generadas por build-es.py)
 robots.txt · sitemap.xml
 favicon* · og-image.jpg · site.webmanifest   → van en la raíz del dominio
 ```
+
+**Versionado de assets:** los `<link>/<script>` de `style.css`, `site.js`, `i18n.js`
+y `analytics.js` llevan `?v=AAAAMMDD`. Los estáticos se cachean 7 días, así que al
+desplegar un cambio de CSS/JS hay que **subir el número `?v=`** (buscar y reemplazar
+en las páginas de la raíz + correr `build-es.py`) y **purgar la caché de Cloudflare**.
+Si no, el navegador sigue sirviendo el CSS/JS viejo. Las fotos no necesitan esto:
+cuando cambia una, cambia también su nombre o su carpeta.
 
 ## Tres cosas antes de publicar
 

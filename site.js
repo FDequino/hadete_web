@@ -96,7 +96,7 @@
   /* ── leaving for the portal: fade out first, no hard flash ── */
   (function () {
     var reduceMo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    Array.prototype.slice.call(document.querySelectorAll('a[href^="https://manage.hadete.com"]'))
+    Array.prototype.slice.call(document.querySelectorAll('a[href^="https://erp.hadete.com"]'))
       .forEach(function (link) {
         link.addEventListener('click', function (e) {
           if (reduceMo || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return;

@@ -34,6 +34,7 @@
     GA4: 'G-F5VBB23BHT',
     ADS: '',
     ADS_LABEL: '',
+    ADS_LABEL_DATASHEET: '',
     META: '',
     LINKEDIN: ''
   };
@@ -175,8 +176,11 @@
     if (CONFIG.ADS && CONFIG.ADS_LABEL && name === 'generate_lead') {
       gtag('event', 'conversion', { send_to: CONFIG.ADS_LABEL });
     }
+    if (CONFIG.ADS && CONFIG.ADS_LABEL_DATASHEET && name === 'download_datasheet') {
+      gtag('event', 'conversion', { send_to: CONFIG.ADS_LABEL_DATASHEET });
+    }
     if (window.fbq) {
-      window.fbq('track', name === 'generate_lead' ? 'Lead' : 'Contact', params);
+      window.fbq('track', name === 'generate_lead' ? 'Lead' : name === 'download_datasheet' ? 'Lead' : 'Contact', params);
     }
   }
   window.hadeteTrack = track;

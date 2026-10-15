@@ -12,7 +12,7 @@ import re, os, json, shutil, html as htmlmod
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 PAGES = ['index.html', 'marca.html', 'about.html', 'privacidad.html',
-         'login.html', 'pronto.html', '404.html']
+         'catalog.html', 'login.html', 'pronto.html', '404.html']
 BASE = 'https://hadete.com/'
 
 
@@ -110,7 +110,7 @@ def translate(page, ES):
     s = str(soup)
 
     # 3. assets and shared files live one level up
-    s = re.sub(r'(href|src)="(assets/|style\.css|site\.js|i18n\.js|analytics\.js|favicon|site\.webmanifest|og-image)',
+    s = re.sub(r'(href|src)="(assets/|style\.css|site\.js|i18n\.js|catalog-data\.js|analytics\.js|favicon|site\.webmanifest|og-image)',
                lambda m: f'{m.group(1)}="../{m.group(2)}', s)
     s = re.sub(r'imagesrcset="([^"]*)"',
                lambda m: 'imagesrcset="' + m.group(1).replace('assets/', '../assets/') + '"', s)
@@ -132,10 +132,12 @@ def main():
 
     # sitemap covering both languages, with hreflang pairs
     urls = []
-    for page in ['index.html', 'marca.html', 'about.html', 'privacidad.html']:
+    for page in ['index.html', 'marca.html', 'catalog.html', 'about.html', 'privacidad.html']:
         en = BASE + ('' if page == 'index.html' else page)
         es = BASE + 'es/' + ('' if page == 'index.html' else page)
-        pri = '1.0' if page == 'index.html' else ('0.8' if page == 'marca.html' else '0.5')
+        pri = ('1.0' if page == 'index.html' else
+               '0.9' if page == 'catalog.html' else
+               '0.8' if page == 'marca.html' else '0.5')
         for loc, alt_self, alt_other, lang, other in (
                 (en, en, es, 'en', 'es'), (es, es, en, 'es', 'en')):
             urls.append(

@@ -27,6 +27,9 @@
   --borra-deep:#3F1B25;
   --arena:#EDE4D6;
   --terra:#B5703F;
+  --terra-lite:#E0B48A;
+  --terra-txt:#8E5227;
+  --muted:#756252;
   --negro:#231A16;
   --paper:#F7F3EC;
   --ink-soft:#574640;
@@ -70,7 +73,7 @@ a{color:inherit}
 /* ── mono data type ─────────────────────────────────────── */
 .mono,.cal-months button,.cal-read,.cal-note,.cal-key,
 .spec dt,.spec dd,.region dl,.hero-foot,.latin,.site-foot p,
-.docs h4,.cinfo dt,form label span,.lang{
+.docs h4,.cinfo dt,form label span,.lang,.backed-lbl{
   font-family:var(--mono);
   font-variant-ligatures:none;
 }
@@ -600,6 +603,18 @@ form button:hover{background:transparent;color:var(--borra)}
 }
 .foot-legal .amp{color:inherit}
 
+/* ── backed by: two third-party marks, own colour, size carries weight ── */
+.backed{border-top:1px solid var(--rule-light);padding:22px 0 30px;
+  display:flex;flex-wrap:wrap;align-items:center;gap:28px}
+.backed-lbl{font-size:9.5px;font-weight:500;letter-spacing:.17em;
+  text-transform:uppercase;color:var(--terra-lite);flex:0 0 auto}
+.backed-logos{display:flex;flex-wrap:wrap;align-items:center;gap:36px}
+.backed a{display:flex;align-items:center;text-decoration:none}
+.backed a:focus-visible{outline:2px solid var(--terra);outline-offset:6px}
+.backed img{display:block}
+.l-deglia{height:17px;width:auto}
+.l-fiducia{height:25px;width:auto}
+
 /* ============================================================
    ABOUT PAGE
    ============================================================ */
@@ -925,6 +940,10 @@ picture{display:contents}
 @media (max-width:620px){
   .consent{left:12px;right:12px;bottom:12px;width:auto;padding:18px}
   .wa{bottom:calc(clamp(16px,2.2vw,30px) + 0px)}
+  .backed{flex-direction:column;align-items:flex-start;gap:14px;padding:18px 0 24px}
+  .backed-logos{gap:26px}
+  .l-deglia{height:15px}
+  .l-fiducia{height:22px}
 }
 
 .soon-acts{margin-top:32px;display:flex;flex-wrap:wrap;align-items:center;gap:20px}
@@ -1023,3 +1042,162 @@ picture{display:contents}
 }
 /* el nombre científico necesitaba más contraste que el filete terracota */
 .latin{color:#8E5227}
+
+/* ============================================================
+   CATALOGUE — mobile-first, QR-code destination
+   ============================================================ */
+.cat-main{padding-top:0}
+
+/* document strip: desktop only, skips the scroll budget on a phone.
+   Whichever of .cat-doc / .cat-intro renders first carries the fixed
+   header's clearance, so the two never stack their top padding. */
+.cat-doc{display:none;background:var(--negro);color:rgba(237,228,214,.8);
+  font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase}
+.cat-doc .shell{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;
+  padding-bottom:8px}
+
+/* intro */
+.cat-intro{background:var(--arena);border-bottom:1px solid var(--rule);
+  padding:clamp(130px,20vh,170px) 0 30px}
+.cat-eyebrow{display:block;font-family:var(--mono);font-size:10px;font-weight:500;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--terra-txt);margin-bottom:14px}
+.cat-intro h1{font-size:clamp(28px,7.4vw,46px);line-height:1.1;color:var(--borra);
+  letter-spacing:-.02em;max-width:17ch}
+.cat-intro p{margin-top:14px;color:var(--ink-soft);font-size:16px;max-width:56ch}
+
+/* sticky filter bar */
+.cat-bar{position:sticky;top:0;z-index:50;background:rgba(247,243,236,.97);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
+.cat-bar-in{padding:0}
+.cat-chips{display:flex;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.cat-chips::-webkit-scrollbar{display:none}
+.cat-chips-in{display:flex;padding:0 var(--gutter)}
+.cat-chip{flex:0 0 auto;font-family:var(--mono);font-size:10.5px;font-weight:500;
+  letter-spacing:.12em;text-transform:uppercase;padding:14px 15px;background:none;
+  border:none;border-bottom:2px solid transparent;color:var(--negro);cursor:pointer;
+  white-space:nowrap;min-height:46px}
+.cat-chip[aria-pressed="true"]{color:var(--borra);border-bottom-color:var(--terra)}
+.cat-modes{display:flex;align-items:center;gap:10px;padding:0 var(--gutter) 11px;
+  font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--terra-txt)}
+.cat-seg{display:flex;margin-left:auto}
+.cat-seg button{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.11em;
+  text-transform:uppercase;padding:9px 14px;min-height:38px;background:none;
+  border:1px solid var(--rule);color:var(--negro);cursor:pointer}
+.cat-seg button+button{border-left:none}
+.cat-seg button[aria-pressed="true"]{background:var(--negro);color:var(--paper);border-color:var(--negro)}
+.cat-count{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;color:var(--muted)}
+
+/* grid + cards */
+.cat-list{padding:22px 0 0}
+.cat-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.cat-card{background:#fff;border:1px solid var(--rule)}
+.cat-ph{aspect-ratio:4/3;background:var(--arena);overflow:hidden;position:relative}
+.cat-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.cat-ph.cat-ph--none{display:flex;align-items:center;justify-content:center;font-family:var(--mono);
+  font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);
+  background:repeating-linear-gradient(45deg,var(--arena),var(--arena) 10px,#E0D2BD 10px,#E0D2BD 20px)}
+.cat-tag{position:absolute;left:0;bottom:0;background:var(--borra);color:var(--paper);
+  font-family:var(--mono);font-size:9px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;padding:6px 11px}
+.cat-body{padding:18px 18px 16px}
+.cat-line{font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--terra-txt)}
+.cat-card h2{font-size:23px;font-weight:400;color:var(--borra);line-height:1.15;margin-top:7px}
+.cat-sci{font-family:var(--mono);font-size:10.5px;color:#6E6055;margin-top:6px;letter-spacing:.02em}
+
+/* MOQ / incoterm / lead time: visible without expanding, next to the key parameter */
+.cat-quick{margin-top:14px;display:flex;flex-wrap:wrap;gap:8px 18px}
+.cat-quick div{display:flex;flex-direction:column;gap:2px}
+.cat-quick dt{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft)}
+.cat-quick dd{font-size:13px;color:var(--negro);font-variant-numeric:tabular-nums}
+.cat-quick dd.cat-pend{color:var(--muted);font-style:italic}
+
+.cat-spec{margin-top:14px;border-top:1px solid rgba(181,112,63,.42)}
+.cat-spec summary{list-style:none;cursor:pointer;font-family:var(--mono);font-size:10px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--terra-txt);padding:12px 0;
+  display:flex;justify-content:space-between;align-items:center;min-height:44px}
+.cat-spec summary::-webkit-details-marker{display:none}
+.cat-spec summary .cat-arrow{transition:transform .18s ease}
+.cat-spec[open] summary .cat-arrow{transform:rotate(180deg)}
+.cat-spec dl{font-size:15px;padding-bottom:4px}
+.cat-spec dl>div{display:flex;justify-content:space-between;gap:12px;padding:8px 0;
+  border-top:1px solid var(--rule)}
+.cat-spec dt{margin:0;font-family:var(--mono);font-size:9.5px;font-weight:500;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--terra-txt);padding-top:3px;flex:0 0 auto}
+.cat-spec dd{margin:0;text-align:right;font-variant-numeric:tabular-nums}
+.cat-spec dd.cat-pend{color:var(--muted);font-style:italic}
+
+.cat-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.cat-btn{flex:1 1 auto;text-align:center;font-family:var(--mono);font-size:10px;font-weight:500;
+  letter-spacing:.13em;text-transform:uppercase;padding:14px 14px;min-height:46px;
+  text-decoration:none;border:1px solid var(--negro);color:var(--negro);background:none;
+  cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cat-btn.cat-btn--prim{background:var(--borra);border-color:var(--borra);color:var(--paper)}
+.cat-btn.cat-btn--off{border-color:var(--rule);color:var(--muted);cursor:not-allowed}
+
+/* processed, listed apart */
+.cat-proc{margin-top:34px;padding-top:28px;border-top:1px solid var(--rule)}
+.cat-proc h2{font-size:24px;font-weight:400;color:var(--borra)}
+.cat-proc p{margin-top:10px;color:var(--ink-soft);font-size:15.5px;max-width:60ch}
+.cat-proc .cat-grid{margin-top:18px}
+
+/* email gate */
+.cat-gate{margin-top:40px;background:var(--borra);color:var(--arena);padding:34px 0}
+.cat-gate h2{font-size:25px;font-weight:400;color:var(--paper);max-width:20ch}
+.cat-gate p{margin-top:12px;color:rgba(237,228,214,.86);font-size:15.5px;max-width:46ch}
+.cat-gate label{display:block;font-family:var(--mono);font-size:9.5px;font-weight:500;
+  letter-spacing:.14em;text-transform:uppercase;color:var(--terra-lite);
+  margin:22px 0 7px}
+.cat-gate-row{display:flex;gap:8px;flex-wrap:wrap}
+.cat-gate input{flex:1 1 200px;min-width:0;padding:14px;min-height:48px;
+  background:rgba(237,228,214,.08);border:1px solid rgba(237,228,214,.34);
+  color:var(--paper);font-family:var(--serif);font-size:16px;border-radius:0}
+.cat-gate input:focus{outline:2px solid var(--terra-lite);outline-offset:2px}
+.cat-gate button{padding:14px 22px;min-height:48px;background:var(--paper);color:var(--borra);
+  border:none;font-family:var(--mono);font-size:10.5px;font-weight:500;letter-spacing:.14em;
+  text-transform:uppercase;cursor:pointer}
+.cat-gate small{display:block;margin-top:11px;font-family:var(--mono);font-size:9px;
+  letter-spacing:.08em;color:rgba(237,228,214,.62)}
+
+/* fixed bottom bar: the only CTA on a phone */
+.cat-ctabar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--negro);
+  padding:11px 20px calc(11px + env(safe-area-inset-bottom,0px));
+  display:flex;gap:10px;align-items:center}
+.cat-ctabar .cat-txt{font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(237,228,214,.72);flex:1 1 auto;line-height:1.4}
+.cat-ctabar a{flex:0 0 auto;background:var(--arena);color:var(--borra);text-decoration:none;
+  font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.13em;
+  text-transform:uppercase;padding:13px 18px;min-height:46px;display:flex;align-items:center}
+
+.cat-empty{padding:40px 0;font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--muted)}
+
+body.cat-page{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+
+@media (min-width:600px){
+  .cat-doc{display:block}
+  .cat-doc .shell{padding-top:clamp(130px,20vh,170px)}
+  .cat-intro{padding-top:34px}
+  .cat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+  .cat-ph{aspect-ratio:1}
+}
+@media (min-width:980px){
+  body.cat-page{padding-bottom:0}
+  .cat-bar-in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;
+    gap:6px 20px;min-height:72px}
+  /* chips keep their own horizontal scroll instead of forcing the page to overflow,
+     and the whole row can wrap to a second line before that happens — Spanish line
+     names (Frutos secos y desecados, Industrializados) run longer than the English
+     ones the mockup was sized for, and don't always fit one row at 980–1100px */
+  .cat-chips{flex:1 1 auto;min-width:0}
+  .cat-chips-in{padding:0}
+  .cat-modes{padding:0;margin-left:auto;flex:0 0 auto}
+  .cat-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+  .cat-ctabar{display:none}
+  .cat-gate{padding:46px 0}
+  .cat-gate-in{display:grid;grid-template-columns:1.1fr 1fr;gap:44px;align-items:center}
+  .cat-gate label{margin-top:0}
+}
+@media (max-width:620px){
+  .cat-quick{gap:6px 16px}
+}

@@ -578,6 +578,209 @@
     select(initial, false);
   })();
 
+  /* ── catalogue page ───────────────────────────────────── */
+  (function catalogue() {
+    var grid = document.getElementById('catGrid');
+    var CAT = window.CATALOG;
+    if (!grid || !CAT) return;
+
+    var procGrid = document.getElementById('catProcGrid');
+    var proc = document.getElementById('catProc');
+    var empty = document.getElementById('catEmpty');
+    var countEl = document.getElementById('catCount');
+    var gateLocked = document.getElementById('catGateLocked');
+    var gateOpen = document.getElementById('catGateOpen');
+
+    var state = { line: 'all', mode: 'bulk' };
+    var pendingProduct = null;
+    var UNLOCK_KEY = 'hadete-catalog-unlock';
+    var unlocked = false;
+    try { unlocked = localStorage.getItem(UNLOCK_KEY) === '1'; } catch (e) {}
+
+    /* English lives at the call site, exactly like CAL.rows above;
+       Spanish comes from DICT.es when the page is the /es/ build. */
+    function tt(key, en) { return (LANG === 'es' && t(key)) || en; }
+
+    function lbl(key) {
+      if (LANG === 'es') {
+        var v = DICT.es && DICT.es['l.' + key];
+        if (v) return v;
+      }
+      return (CAT.LABELS_EN && CAT.LABELS_EN[key]) || key;
+    }
+
+    var LINES = {
+      oils: ['line.oils', 'Olives & oils'],
+      nuts: ['line.nuts', 'Nuts & dried'],
+      pulses: ['line.pulses', 'Pulses'],
+      spices: ['line.spices', 'Spices'],
+      industrial: ['line.industrial', 'Industrialised']
+    };
+    function lineLabel(line) {
+      var m = LINES[line];
+      return m ? tt(m[0], m[1]) : line;
+    }
+
+    function pend(v) { return v.charAt(0) === '[' ? ' class="cat-pend"' : ''; }
+
+    function quickFacts() {
+      var rows = [
+        ['moq', CAT.MOQ[LANG]],
+        ['incoterm', CAT.INCOTERM[LANG]],
+        ['leadtime', CAT.LEAD_TIME[LANG]]
+      ];
+      return '<dl class="cat-quick">' + rows.map(function (r) {
+        return '<div><dt>' + lbl(r[0]) + '</dt><dd' + pend(r[1]) + '>' + r[1] + '</dd></div>';
+      }).join('') + '</dl>';
+    }
+
+    function photo(p) {
+      /* root-absolute: this same markup renders at both /catalog.html and
+         /es/catalog.html, and a page-relative path would break on the second */
+      var base = '/assets/r/' + p.img;
+      var sizes = '(max-width:599px) 100vw, (max-width:979px) 50vw, 33vw';
+      var alt = p.alt[LANG];
+      return '<picture>' +
+        '<source type="image/avif" sizes="' + sizes + '" srcset="' + base + '-440.avif 440w, ' + base + '-700.avif 700w, ' + base + '-900.avif 900w">' +
+        '<source type="image/webp" sizes="' + sizes + '" srcset="' + base + '-440.webp 440w, ' + base + '-700.webp 700w, ' + base + '-900.webp 900w">' +
+        '<img src="' + base + '-700.jpg" sizes="' + sizes + '" srcset="' + base + '-440.jpg 440w, ' + base + '-700.jpg 700w, ' + base + '-900.jpg 900w" ' +
+        'alt="' + alt + '" loading="lazy" decoding="async" width="900" height="900">' +
+        '</picture>';
+    }
+
+    function card(p) {
+      var rows = state.mode === 'bulk' ? p.bulk : p.retail;
+      var valueIndex = LANG === 'es' ? 2 : 1;
+      var btn;
+      if (!p.spec) {
+        btn = '<button class="cat-btn cat-btn--off" type="button" disabled>' + tt('cat.btn.prep', 'Spec in preparation') + '</button>';
+      } else {
+        btn = '<button class="cat-btn js-cat-spec" type="button" data-id="' + p.id + '">' +
+          (unlocked ? tt('cat.btn.download', 'Download spec') : tt('cat.btn.spec', 'Specification')) + '</button>';
+      }
+      var quoteSubject = encodeURIComponent('Quote request — ' + p.name.en);
+      return '<article class="cat-card" id="cat-' + p.id + '" data-line="' + p.line + '">' +
+        '<div class="cat-ph">' + photo(p) + '<span class="cat-tag">' + p.key[LANG] + '</span></div>' +
+        '<div class="cat-body">' +
+          '<div class="cat-line">' + lineLabel(p.line) + '</div>' +
+          '<h2>' + p.name[LANG] + '</h2>' +
+          '<div class="cat-sci">' + p.sci + '</div>' +
+          quickFacts() +
+          '<details class="cat-spec"><summary>' + tt('cat.btn.spec', 'Specification') +
+            ' <span class="cat-arrow" aria-hidden="true">&#9662;</span></summary><dl>' +
+            rows.map(function (r) {
+              var val = r[valueIndex];
+              return '<div><dt>' + lbl(r[0]) + '</dt><dd' + pend(val) + '>' + val + '</dd></div>';
+            }).join('') +
+          '</dl></details>' +
+          '<div class="cat-acts">' +
+            '<a class="cat-btn cat-btn--prim" href="mailto:sales@hadete.com?subject=' + quoteSubject + '">' + tt('hero.cta', 'Request a quotation') + '</a>' +
+            btn +
+          '</div>' +
+        '</div></article>';
+    }
+
+    function wireSpecButtons(root) {
+      Array.prototype.forEach.call(root.querySelectorAll('.js-cat-spec'), function (b) {
+        b.addEventListener('click', function () {
+          var id = b.getAttribute('data-id');
+          if (unlocked) { downloadSheet(id); return; }
+          pendingProduct = id;
+          var gate = document.getElementById('catGate');
+          if (gate) gate.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          var mail = document.getElementById('catMail');
+          if (mail) mail.focus({ preventScroll: true });
+        });
+      });
+    }
+
+    function draw() {
+      var main = CAT.PRODUCTS.filter(function (p) {
+        return p.line !== 'industrial' && (state.line === 'all' || state.line === p.line);
+      });
+      var procItems = CAT.PRODUCTS.filter(function (p) { return p.line === 'industrial'; });
+      var showProc = state.line === 'all' || state.line === 'industrial';
+
+      grid.innerHTML = main.map(card).join('');
+      if (procGrid) procGrid.innerHTML = procItems.map(card).join('');
+      if (proc) proc.hidden = !showProc;
+      if (empty) empty.hidden = !(main.length === 0 && !showProc);
+
+      var n = main.length + (showProc ? procItems.length : 0);
+      if (countEl) {
+        countEl.textContent = n + ' ' + tt(n === 1 ? 'cat.count.one' : 'cat.count.many', n === 1 ? 'product' : 'products');
+      }
+
+      wireSpecButtons(grid);
+      if (procGrid) wireSpecButtons(procGrid);
+    }
+
+    function downloadSheet(id) {
+      var p = CAT.PRODUCTS.filter(function (x) { return x.id === id; })[0];
+      if (!p || !p.pdf) return;
+      if (window.hadeteTrack) window.hadeteTrack('download_datasheet', { product: id, language: document.documentElement.lang });
+      window.open(p.pdf, '_blank', 'noopener');
+    }
+
+    function gateSync() {
+      if (gateLocked) gateLocked.hidden = unlocked;
+      if (gateOpen) gateOpen.hidden = !unlocked;
+    }
+
+    function setUnlocked(v) {
+      unlocked = v;
+      try { localStorage.setItem(UNLOCK_KEY, v ? '1' : '0'); } catch (e) {}
+      gateSync();
+      draw();
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('.cat-chip'), function (c) {
+      c.addEventListener('click', function () {
+        state.line = c.getAttribute('data-line');
+        Array.prototype.forEach.call(document.querySelectorAll('.cat-chip'), function (o) {
+          o.setAttribute('aria-pressed', String(o === c));
+        });
+        draw();
+      });
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.cat-seg button'), function (b) {
+      b.addEventListener('click', function () {
+        state.mode = b.getAttribute('data-mode');
+        Array.prototype.forEach.call(document.querySelectorAll('.cat-seg button'), function (o) {
+          o.setAttribute('aria-pressed', String(o === b));
+        });
+        draw();
+      });
+    });
+
+    var gateForm = document.getElementById('catGateForm');
+    if (gateForm) {
+      gateForm.addEventListener('submit', function (e) {
+        e.preventDefault();
+        var mail = document.getElementById('catMail');
+        var email = mail ? mail.value.trim() : '';
+        if (!email) return;
+        /* soft gate: the download never waits on this request */
+        fetch('https://formsubmit.co/ajax/sales@hadete.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          body: JSON.stringify({
+            _subject: 'Catalogue datasheet unlock',
+            email: email,
+            product: pendingProduct || '',
+            language: document.documentElement.lang
+          })
+        }).catch(function () {});
+        setUnlocked(true);
+        if (pendingProduct) { downloadSheet(pendingProduct); pendingProduct = null; }
+      });
+    }
+
+    gateSync();
+    draw();
+  })();
+
   /* ── boot ─────────────────────────────────────────────── */
   if (hasCal) buildCal();
 

@@ -9,19 +9,46 @@ index.html       home — portafolio de 9 productos (pestañas por línea), form
                  cosecha, origen, alcance, contacto
 marca.html       La marca Hadeté — línea fraccionada (9)
 about.html       Nosotros — granel / marca propia / marca Hadeté
+catalog.html     catálogo — destino de QR, 9 fichas con gate de mail (ver abajo)
 privacidad.html  política de privacidad
 login.html       formulario de acceso (huérfano; "Ingresar" apunta a pronto.html)
 pronto.html      área privada en construcción
 404.html
 style.css        paleta y tipografía del manual de marca
 i18n.js          idiomas (ver abajo)
-site.js          header, menú, idioma, calendario, mapas, pestañas, animaciones
+catalog-data.js  los nueve productos del catálogo, bilingüe, solo para catalog.html
+site.js          header, menú, idioma, calendario, mapas, pestañas, animaciones, catálogo
 analytics.js     GA4, Google Ads, Meta Pixel, LinkedIn — GA4 cargado, el resto vacío
 assets/          fotos responsive (r/), originales (_source/, gitignored), logos SVG
+docs/            las nueve fichas técnicas en PDF — públicas por diseño, disallowed en robots.txt
 es/              versiones en español (generadas por build-es.py)
 robots.txt · sitemap.xml
 favicon* · og-image.jpg · site.webmanifest   → van en la raíz del dominio
 ```
+
+## Catálogo (`catalog.html`)
+
+Pensado como destino de un QR impreso: móvil primero, nueve productos con foto, el
+parámetro que decide la compra, y una ficha técnica en PDF detrás de un gate blando
+(solo pide el mail, no hay nada que proteger en un sitio estático — lo que se controla
+es el momento en que se revela). El desbloqueo queda en `localStorage` del navegador.
+
+Dos cosas pendientes de tu lado, no de desarrollo:
+
+- **MOQ, Incoterm y plazo de entrega** están en `[ to confirm ]` para los nueve
+  productos, en las constantes `MOQ`/`INCOTERM`/`LEAD_TIME` al tope de
+  `catalog-data.js`. Completalas ahí una sola vez.
+- **Pasas de uva — revisar antes de imprimir el QR**: el dato clave de la ficha dice
+  "Dried on the vine" (así lo pediste vos), pero el dato confirmado de secado dice
+  "secado en planta" (también así lo pediste). Son dos métodos de secado distintos;
+  quedó anotado en el código (`catalog-data.js`, producto `raisins`) pero hay que
+  resolverlo contra el dato real antes de que un comprador lo note.
+
+Comino y fideos secos muestran "Spec in preparation" en vez de un botón de descarga:
+sus PDF en `docs/` existen pero llegaron con la mayoría de los campos sin completar
+(verificado abriendo los dos PDF — el de comino dice literalmente "this sheet is the
+most incomplete of the nine. It should not be sent to a buyer until they are filled
+in").
 
 **Versionado de assets:** los `<link>/<script>` de `style.css`, `site.js`, `i18n.js`
 y `analytics.js` llevan `?v=AAAAMMDD`. Los estáticos se cachean 7 días, así que al
@@ -88,8 +115,8 @@ conversión, el píxel de Meta y LinkedIn. Lo que está vacío no carga.
 
 ### De dónde sale cada ID y qué pasa si falta
 
-Los cinco viven en el bloque `CONFIG` arriba de `analytics.js`. Hoy solo `GA4` está
-cargado; los otros cuatro están vacíos a propósito, listos para pegar el valor. Lo que
+Los seis viven en el bloque `CONFIG` arriba de `analytics.js`. Hoy solo `GA4` está
+cargado; los otros cinco están vacíos a propósito, listos para pegar el valor. Lo que
 quede vacío no carga su script, así que el sitio sigue liviano.
 
 | Campo | Formato | De dónde se saca | Qué pasa si queda vacío |
@@ -97,14 +124,22 @@ quede vacío no carga su script, así que el sitio sigue liviano.
 | `GA4` | `G-XXXXXXXXXX` | GA4 → Administrar → Flujos de datos → tu flujo web → *ID de medición* | **Ya cargado** (`G-F5VBB23BHT`). Sin él no hay analítica de tráfico y, como es el único ID activo, tampoco aparece el cartel de consentimiento. |
 | `ADS` | `AW-XXXXXXXXX` | Google Ads → arriba a la derecha, el ID de cuenta con prefijo `AW-` (o Herramientas → Conversiones) | No carga la etiqueta de Ads: sin remarketing ni conversiones de Ads. GA4 sigue midiendo. |
 | `ADS_LABEL` | `AW-XXXXXXXXX/AbCdEfGh` | Google Ads → Conversiones → acción "Lead / envío de formulario" → *Configurar etiqueta* → **Etiqueta de conversión** (se pega junto al `AW-` con la barra) | **El más caro de dejar vacío.** Aunque `ADS` esté cargado, no se registra NINGUNA conversión de Ads, y sin conversiones el Smart Bidding no puede optimizar: se queda sin la señal que le dice qué clic vale. |
+| `ADS_LABEL_DATASHEET` | `AW-XXXXXXXXX/AbCdEfGh` | Google Ads → Conversiones → creá una acción separada "Descarga de ficha" (o similar) → *Configurar etiqueta* → **Etiqueta de conversión** | Sin ella, la descarga de ficha del catálogo (`download_datasheet`) sigue midiéndose en GA4, pero no se registra como conversión de Ads aparte de la del formulario de contacto — no podés pujar distinto para "pidió specs" vs. "llenó el formulario". |
 | `META` | 15–16 dígitos | Meta Events Manager → Orígenes de datos → tu píxel → Configuración → *ID del conjunto/píxel* | No carga el píxel: sin eventos `Lead`/`Contact` en Meta ni públicos de remarketing. |
 | `LINKEDIN` | ~7 dígitos | LinkedIn Campaign Manager → Analizar → Insight Tag → *Partner ID* | No carga el Insight Tag: sin conversiones ni audiencias en LinkedIn. |
 
 Los eventos de contacto se disparan al `dataLayer` apenas ocurren, pero **solo se
 transmiten después de que el visitante acepta** (Consent Mode v2). Verificado en el
 navegador: enviar el formulario dispara `generate_lead` con el producto elegido, y un
-clic en cualquier `mailto:` dispara `contact_email`. Son las dos conversiones reales del
-sitio; `contact_whatsapp` es la tercera, en el botón flotante.
+clic en cualquier `mailto:` dispara `contact_email`. Son dos de las conversiones reales
+del sitio; `contact_whatsapp` es otra, en el botón flotante.
+
+En `catalog.html`, desbloquear una ficha dispara `download_datasheet` con el producto
+como parámetro — una conversión aparte de `generate_lead`, porque quien pide la
+especificación de un producto puntual está más abajo en el embudo que quien solo mira.
+El mail que se deja en el desbloqueo llega a `sales@hadete.com` como lead (vía
+FormSubmit, igual que el formulario de contacto), y el PDF se abre en el momento: no
+hay nada que lo bloquee salvo el gate blando del lado del navegador.
 
 ## Imágenes
 

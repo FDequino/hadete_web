@@ -29,6 +29,20 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://hadete.com/catalog.html</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hadete.com/catalog.html"/>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hadete.com/es/catalog.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hadete.com/catalog.html"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://hadete.com/es/catalog.html</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://hadete.com/es/catalog.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://hadete.com/catalog.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://hadete.com/catalog.html"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://hadete.com/about.html</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://hadete.com/about.html"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://hadete.com/es/about.html"/>

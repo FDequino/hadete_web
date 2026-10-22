@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hadeté</title>
+<meta name="robots" content="noindex,nofollow">
+<style>
+  html,body{height:100%;margin:0}
+  body{background:#5C2A38;color:#EDE4D6;display:flex;align-items:center;
+       justify-content:center;font-family:'Tinos',Times,serif;font-size:18px}
+  p{opacity:.8;letter-spacing:.04em}
+</style>
+<script>
+/* Destino del QR impreso en la tarjeta.
+   Esta página existe para poder cambiar el destino sin reimprimir nada:
+   el código apunta a hadete.com/c y nunca más cambia.
+
+   NO BORRAR. Mientras haya una tarjeta impresa dando vueltas, esta página
+   tiene que existir.
+
+   Agrega los parámetros de campaña del lado del servidor, así el QR queda
+   lo más simple posible: 27x27 módulos en vez de 39x39. */
+(function () {
+  var DESTINO = '/catalog.html';
+  var CAMPANA = '?utm_source=tarjeta&utm_medium=qr&utm_campaign=tarjeta-2026';
+  location.replace(DESTINO + CAMPANA);
+})();
+</script>
+<noscript><meta http-equiv="refresh" content="0;url=/catalog.html"></noscript>
+</head>
+<body>
+  <p>Redirecting to the catalogue…</p>
+</body>
+</html>

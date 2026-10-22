@@ -31,6 +31,9 @@ ErrorDocument 404 /404.html
 
   # /es  ->  /es/   (evita un redirect extra y una URL duplicada)
   RewriteRule ^es$ /es/ [R=301,L]
+
+  # /c  ->  /c/   (QR de las tarjetas de presentación, mismo motivo que /es)
+  RewriteRule ^c$ /c/ [R=301,L]
 </IfModule>
 
 # ── Compresión ──────────────────────────────────────────────

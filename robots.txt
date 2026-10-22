@@ -5,5 +5,6 @@ Disallow: /pronto.html
 Disallow: /es/login.html
 Disallow: /es/pronto.html
 Disallow: /docs/
+Disallow: /c/
 
 Sitemap: https://hadete.com/sitemap.xml

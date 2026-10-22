@@ -792,7 +792,11 @@
     if (seen) return;
     try { sessionStorage.setItem('hadete-lang-seen', '1'); } catch (e) {}
     if ((navigator.language || '').slice(0, 2).toLowerCase() !== 'es') return;
-    if (document.referrer && document.referrer.indexOf(location.host) > -1) return;
+    /* /c es el redirector fijo del QR de las tarjetas: su referrer es del
+       propio sitio, pero el visitante nunca vio ni eligió un idioma ahí,
+       así que no cuenta como "ya navegó por hadete.com" */
+    var fromCard = /\/c\/?(?:$|[?#])/.test(document.referrer);
+    if (document.referrer && document.referrer.indexOf(location.host) > -1 && !fromCard) return;
     var here = location.pathname.split('/').pop() || 'index.html';
     var clean = here === 'index.html' ? '' : here;
     location.replace('es/' + clean + location.search + location.hash);

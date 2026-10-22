@@ -15,9 +15,9 @@
 
 window.CATALOG = {
 
-  MOQ: { en: '[ to confirm ]', es: '[ a confirmar ]' },
-  INCOTERM: { en: '[ to confirm ]', es: '[ a confirmar ]' },
-  LEAD_TIME: { en: '[ to confirm ]', es: '[ a confirmar ]' },
+  MOQ: { en: 'To arrange', es: 'A coordinar' },
+  INCOTERM: { en: 'To arrange', es: 'A coordinar' },
+  LEAD_TIME: { en: 'To arrange', es: 'A coordinar' },
 
   /* English text for every row label used below. The ones that already
      exist in the homepage's shared l.* dictionary (origin, acidity, bulk…)
@@ -82,7 +82,7 @@ window.CATALOG = {
         ['acidity', '≤ 0.4 %', '≤ 0,4 %'],
         ['netweight', '500 ml tin · 500 ml glass', 'Lata de 500 ml · Vidrio de 500 ml'],
         ['giftformat', '250 ml cruet', 'Vinagrera de 250 ml'],
-        ['unitspercase', '[ to confirm ]', '[ a confirmar ]'],
+        ['unitspercase', 'To confirm', 'A confirmar'],
         ['shelflife', '24 months', '24 meses']
       ]
     },
@@ -99,18 +99,18 @@ window.CATALOG = {
       bulk: [
         ['origin', 'San Juan', 'San Juan'],
         ['variety', 'Arauco', 'Arauco'],
-        ['calibre', '[ to confirm ]', '[ a confirmar ]'],
-        ['brine', '[ to confirm ]', '[ a confirmar ]'],
-        ['bulk', '[ to confirm ]', '[ a confirmar ]'],
+        ['calibre', 'To confirm', 'A confirmar'],
+        ['brine', 'To confirm', 'A confirmar'],
+        ['bulk', 'To confirm', 'A confirmar'],
         ['hscode', '2005.70', '2005.70']
       ],
       retail: [
         ['origin', 'San Juan', 'San Juan'],
         ['variety', 'Arauco', 'Arauco'],
         ['netweight', '350 g', '350 g'],
-        ['drainedweight', '[ to confirm ]', '[ a confirmar ]'],
-        ['unitspercase', '[ to confirm ]', '[ a confirmar ]'],
-        ['shelflife', '[ to confirm ]', '[ a confirmar ]']
+        ['drainedweight', 'To confirm', 'A confirmar'],
+        ['unitspercase', 'To confirm', 'A confirmar'],
+        ['shelflife', 'To confirm', 'A confirmar']
       ]
     },
     {
@@ -138,7 +138,7 @@ window.CATALOG = {
         ['origin', 'San Juan — Tulum and Zonda', 'San Juan — Tulum y Zonda'],
         ['addedsugar', 'None', 'Sin agregado'],
         ['netweight', '1 kg pouch', 'Bolsa de 1 kg'],
-        ['unitspercase', '[ to confirm ]', '[ a confirmar ]'],
+        ['unitspercase', 'To confirm', 'A confirmar'],
         ['shelflife', '12 months', '12 meses'],
         ['storage', 'Below 18 °C', 'Por debajo de 18 °C']
       ]
@@ -158,7 +158,7 @@ window.CATALOG = {
         ['form', 'Shelled halves', 'Mitades peladas'],
         ['moisture', '≤ 5 %', '≤ 5 %'],
         ['allergen', 'Tree nut', 'Fruto de cáscara'],
-        ['bulk', '[ to confirm ]', '[ a confirmar ]'],
+        ['bulk', 'To confirm', 'A confirmar'],
         ['hscode', '0802.12', '0802.12']
       ],
       retail: [
@@ -166,7 +166,7 @@ window.CATALOG = {
         ['form', 'Shelled halves', 'Mitades peladas'],
         ['netweight', '500 g', '500 g'],
         ['allergen', 'Tree nut', 'Fruto de cáscara'],
-        ['unitspercase', '[ to confirm ]', '[ a confirmar ]'],
+        ['unitspercase', 'To confirm', 'A confirmar'],
         ['shelflife', '12 months', '12 meses']
       ]
     },
@@ -192,7 +192,7 @@ window.CATALOG = {
         ['origin', 'Salta · Jujuy · Tucumán', 'Salta · Jujuy · Tucumán'],
         ['grade', 'Sprouting grade', 'Grado para brotes'],
         ['netweight', '500 g', '500 g'],
-        ['unitspercase', '[ to confirm ]', '[ a confirmar ]'],
+        ['unitspercase', 'To confirm', 'A confirmar'],
         ['shelflife', '24 months', '24 meses'],
         ['storage', 'Cool and dry', 'Fresco y seco']
       ]
@@ -210,17 +210,17 @@ window.CATALOG = {
       bulk: [
         ['origin', 'Salta · Jujuy · Tucumán', 'Salta · Jujuy · Tucumán'],
         ['grade', 'Food grade', 'Grado alimentario'],
-        ['calibre', '[ to confirm ]', '[ a confirmar ]'],
-        ['moisture', '[ to confirm ]', '[ a confirmar ]'],
-        ['bulk', '[ to confirm ]', '[ a confirmar ]'],
+        ['calibre', 'To confirm', 'A confirmar'],
+        ['moisture', 'To confirm', 'A confirmar'],
+        ['bulk', 'To confirm', 'A confirmar'],
         ['hscode', '0713.33', '0713.33']
       ],
       retail: [
         ['origin', 'Salta · Jujuy · Tucumán', 'Salta · Jujuy · Tucumán'],
         ['grade', 'Food grade', 'Grado alimentario'],
         ['netweight', '500 g', '500 g'],
-        ['unitspercase', '[ to confirm ]', '[ a confirmar ]'],
-        ['shelflife', '[ to confirm ]', '[ a confirmar ]'],
+        ['unitspercase', 'To confirm', 'A confirmar'],
+        ['shelflife', 'To confirm', 'A confirmar'],
         ['storage', 'Cool and dry', 'Fresco y seco']
       ]
     },
@@ -238,15 +238,15 @@ window.CATALOG = {
         ['origin', 'Argentina', 'Argentina'],
         ['colour', '≥ 120 ASTA', '≥ 120 ASTA'],
         ['process', 'Oak-smoked, stone-ground', 'Ahumado en roble, molido a piedra'],
-        ['moisture', '[ to confirm ]', '[ a confirmar ]'],
-        ['bulk', '[ to confirm ]', '[ a confirmar ]'],
+        ['moisture', 'To confirm', 'A confirmar'],
+        ['bulk', 'To confirm', 'A confirmar'],
         ['hscode', '0904.22', '0904.22']
       ],
       retail: [
         ['origin', 'Argentina', 'Argentina'],
         ['colour', '≥ 120 ASTA', '≥ 120 ASTA'],
         ['netweight', '100 g', '100 g'],
-        ['unitspercase', '[ to confirm ]', '[ a confirmar ]'],
+        ['unitspercase', 'To confirm', 'A confirmar'],
         ['shelflife', '24 months', '24 meses'],
         ['storage', 'Away from light', 'Al resguardo de la luz']
       ]
@@ -263,18 +263,18 @@ window.CATALOG = {
       key: { en: 'Whole seed', es: 'Grano entero' },
       bulk: [
         ['origin', 'Argentina', 'Argentina'],
-        ['purity', '[ to confirm ]', '[ a confirmar ]'],
-        ['volatileoil', '[ to confirm ]', '[ a confirmar ]'],
-        ['moisture', '[ to confirm ]', '[ a confirmar ]'],
-        ['bulk', '[ to confirm ]', '[ a confirmar ]'],
+        ['purity', 'To confirm', 'A confirmar'],
+        ['volatileoil', 'To confirm', 'A confirmar'],
+        ['moisture', 'To confirm', 'A confirmar'],
+        ['bulk', 'To confirm', 'A confirmar'],
         ['hscode', '0909.31', '0909.31']
       ],
       retail: [
         ['origin', 'Argentina', 'Argentina'],
         ['netweight', '100 g', '100 g'],
-        ['purity', '[ to confirm ]', '[ a confirmar ]'],
-        ['unitspercase', '[ to confirm ]', '[ a confirmar ]'],
-        ['shelflife', '[ to confirm ]', '[ a confirmar ]'],
+        ['purity', 'To confirm', 'A confirmar'],
+        ['unitspercase', 'To confirm', 'A confirmar'],
+        ['shelflife', 'To confirm', 'A confirmar'],
         ['storage', 'Cool and dry', 'Fresco y seco']
       ]
     },
@@ -292,8 +292,8 @@ window.CATALOG = {
         ['origin', 'Argentina', 'Argentina'],
         ['cut', 'Spaghetti N.5', 'Spaghetti N.5'],
         ['allergen', 'Gluten', 'Gluten'],
-        ['semolina', '[ to confirm ]', '[ a confirmar ]'],
-        ['case', '[ to confirm ]', '[ a confirmar ]'],
+        ['semolina', 'To confirm', 'A confirmar'],
+        ['case', 'To confirm', 'A confirmar'],
         ['hscode', '1902.19', '1902.19']
       ],
       retail: [
@@ -301,8 +301,8 @@ window.CATALOG = {
         ['cut', 'Spaghetti N.5', 'Spaghetti N.5'],
         ['allergen', 'Gluten', 'Gluten'],
         ['netweight', '500 g', '500 g'],
-        ['unitspercase', '[ to confirm ]', '[ a confirmar ]'],
-        ['shelflife', '[ to confirm ]', '[ a confirmar ]']
+        ['unitspercase', 'To confirm', 'A confirmar'],
+        ['shelflife', 'To confirm', 'A confirmar']
       ]
     }
   ]

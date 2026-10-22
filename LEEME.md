@@ -35,9 +35,13 @@ es el momento en que se revela). El desbloqueo queda en `localStorage` del naveg
 
 Dos cosas pendientes de tu lado, no de desarrollo:
 
-- **MOQ, Incoterm y plazo de entrega** están en `[ to confirm ]` para los nueve
-  productos, en las constantes `MOQ`/`INCOTERM`/`LEAD_TIME` al tope de
-  `catalog-data.js`. Completalas ahí una sola vez.
+- **MOQ, Incoterm y plazo de entrega** muestran "A coordinar" / "To arrange" para
+  los nueve productos (constantes `MOQ`/`INCOTERM`/`LEAD_TIME` al tope de
+  `catalog-data.js`), y las specs técnicas por producto que todavía no tenés
+  (calibre, humedad, salmuera, peso escurrido, vida útil, unidades por caja, pureza,
+  aceite volátil, sémola, caja) muestran "A confirmar" / "To confirm". Cuando tengas
+  los valores reales, reemplazalos ahí; ya no llevan corchetes `[ ]`, así que no se
+  ven como placeholders sin terminar.
 - **Pasas de uva — revisar antes de imprimir el QR**: el dato clave de la ficha dice
   "Dried on the vine" (así lo pediste vos), pero el dato confirmado de secado dice
   "secado en planta" (también así lo pediste). Son dos métodos de secado distintos;

@@ -831,8 +831,20 @@
         return r.json();
       }).then(function (j) {
         if (!j || !j.ok) throw new Error('not ok');
-        if (defaultView) defaultView.hidden = true;
-        if (sentView) sentView.hidden = false;
+        if (defaultView) {
+          defaultView.classList.add('cf-fade');
+          setTimeout(function () {
+            defaultView.hidden = true;
+            if (sentView) {
+              sentView.hidden = false;
+              sentView.classList.add('cf-fade');
+              void sentView.offsetWidth;
+              sentView.classList.remove('cf-fade');
+            }
+          }, 250);
+        } else if (sentView) {
+          sentView.hidden = false;
+        }
       }).catch(function () {
         if (btn) btn.disabled = false;
         window.alert(err[document.documentElement.lang] || err.en);

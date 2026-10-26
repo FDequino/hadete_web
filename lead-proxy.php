@@ -87,7 +87,24 @@ curl_setopt_array($ch, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_TIMEOUT => 5,
 ]);
-curl_exec($ch);
+$response = curl_exec($ch);
+$status = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+$curlError = curl_error($ch);
 curl_close($ch);
 
-echo json_encode(['ok' => true]);
+$ok = $curlError === '' && $status >= 200 && $status < 300;
+
+if (!$ok) {
+    $line = sprintf(
+        "[%s] status=%s curl_error=%s email=%s response=%s\n",
+        date('c'),
+        $status,
+        $curlError,
+        $email,
+        is_string($response) ? substr($response, 0, 500) : ''
+    );
+    @file_put_contents(__DIR__ . '/lead-proxy.log', $line, FILE_APPEND);
+}
+
+http_response_code($ok ? 200 : 502);
+echo json_encode(['ok' => $ok]);

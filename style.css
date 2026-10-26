@@ -564,6 +564,8 @@ input::placeholder,textarea::placeholder{color:rgba(87,70,64,.42)}
 input:focus,select:focus,textarea:focus{outline:0;border-color:var(--terra);box-shadow:inset 0 0 0 1px rgba(181,112,63,.25)}
 textarea{resize:vertical;line-height:1.55}
 .f-send{display:flex;flex-wrap:wrap;align-items:center;gap:20px;margin-top:6px}
+#contactFormDefault,#contactFormSent{transition:opacity .25s ease}
+#contactFormDefault.cf-fade,#contactFormSent.cf-fade{opacity:0}
 form button{
   padding:15px 38px;background:var(--borra);color:var(--arena);border:1px solid var(--borra);
   font-family:var(--serif);font-size:16px;cursor:pointer;transition:background .22s,color .22s;

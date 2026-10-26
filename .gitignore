@@ -4,6 +4,7 @@ hadete-deploy.zip
 .env
 .env.*
 lead-proxy.config.php
+lead-proxy.log
 ANALISIS-SEO-SEM-MKT.md
 PLAN-VENTAS.md
 presentacion-plan-ventas.html

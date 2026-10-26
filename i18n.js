@@ -400,6 +400,7 @@ window.I18N = {
       "cat.gate.locked.p": "Dejanos tu correo y se desbloquean las nueve fichas técnicas, acá y en tu próxima visita. Sin cuenta, sin contraseña.",
       "cat.gate.open.h2": "Especificaciones desbloqueadas.",
       "cat.gate.open.p": "Escribinos por correo o WhatsApp con el producto, el volumen y el puerto de destino, y volvemos con una cotización dentro de un día hábil.",
+      "cat.gate.name.label": "Tu nombre",
       "cat.gate.label": "Tu correo",
       "cat.gate.btn": "Desbloquear",
       "cat.gate.note": "Solo lo usamos para mandarte las fichas y responder tu consulta.",

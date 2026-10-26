@@ -758,15 +758,17 @@
     if (gateForm) {
       gateForm.addEventListener('submit', function (e) {
         e.preventDefault();
+        var nameField = document.getElementById('catName');
+        var name = nameField ? nameField.value.trim() : '';
         var mail = document.getElementById('catMail');
         var email = mail ? mail.value.trim() : '';
         if (!email) return;
         /* soft gate: the download never waits on this request */
-        fetch('https://formsubmit.co/ajax/2538d5198f92619947dfb7f840d764ee', {
+        fetch('/lead-proxy.php', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            _subject: 'Catalogue datasheet unlock',
+            name: name,
             email: email,
             product: pendingProduct || '',
             language: document.documentElement.lang

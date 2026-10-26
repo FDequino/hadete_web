@@ -762,7 +762,7 @@
         var email = mail ? mail.value.trim() : '';
         if (!email) return;
         /* soft gate: the download never waits on this request */
-        fetch('https://formsubmit.co/ajax/sales@hadete.com', {
+        fetch('https://formsubmit.co/ajax/2538d5198f92619947dfb7f840d764ee', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({

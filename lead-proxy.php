@@ -18,25 +18,62 @@ if ($apiKey === '') {
 }
 
 $input = json_decode((string) file_get_contents('php://input'), true);
-$email = is_array($input) ? trim((string) ($input['email'] ?? '')) : '';
+if (!is_array($input)) {
+    http_response_code(400);
+    echo json_encode(['ok' => false]);
+    exit;
+}
+
+/* honeypot: bots fill every field, including this one, which stays empty
+   and hidden for real visitors. Pretend it worked so they don't learn. */
+if (trim((string) ($input['_honey'] ?? '')) !== '') {
+    echo json_encode(['ok' => true]);
+    exit;
+}
+
+$email = trim((string) ($input['email'] ?? ''));
 if ($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     http_response_code(400);
     echo json_encode(['ok' => false]);
     exit;
 }
 
-$name = trim((string) ($input['name'] ?? '')) ?: $email;
+$name = trim((string) ($input['name'] ?? ''));
+$company = trim((string) ($input['company'] ?? ''));
 $product = trim((string) ($input['product'] ?? ''));
+$port = trim((string) ($input['port'] ?? ''));
+$volume = trim((string) ($input['volume'] ?? ''));
+$message = trim((string) ($input['message'] ?? ''));
+$source = trim((string) ($input['source'] ?? ''));
 $language = trim((string) ($input['language'] ?? 'es')) ?: 'es';
 
+$notes = [];
+if ($source === 'catalog') {
+    $notes[] = 'Pidió la ficha técnica desde el catálogo del sitio web.';
+}
+if ($company !== '' && $name !== '') {
+    $notes[] = 'Empresa: ' . $company;
+}
+if ($port !== '') {
+    $notes[] = 'Destino: ' . $port;
+}
+if ($volume !== '') {
+    $notes[] = 'Volumen: ' . $volume;
+}
+if ($message !== '') {
+    $notes[] = $message;
+}
+
 $payload = [
-    'name' => $name,
+    'name' => $name !== '' ? $name : ($company !== '' ? $company : $email),
     'email' => $email,
     'language' => $language,
 ];
 if ($product !== '') {
     $payload['product'] = $product;
-    $payload['message'] = 'Pidió la ficha técnica desde el catálogo del sitio web.';
+}
+if ($notes) {
+    $payload['message'] = implode("\n", $notes);
 }
 
 $ch = curl_init('https://erp.hadete.com/api/public/leads-web');

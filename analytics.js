@@ -110,7 +110,7 @@
   var attribution = captureAttribution();
 
   function stampForm() {
-    var form = document.querySelector('form[action*="formsubmit"]');
+    var form = document.getElementById('contactForm');
     if (!form || !attribution) return;
     Object.keys(attribution).forEach(function (k) {
       if (k === 't') return;
@@ -188,7 +188,7 @@
   function wire() {
     stampForm();
 
-    var form = document.querySelector('form[action*="formsubmit"]');
+    var form = document.getElementById('contactForm');
     if (form) {
       form.addEventListener('submit', function () {
         var email = form.querySelector('[name="email"]');

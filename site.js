@@ -771,7 +771,8 @@
             name: name,
             email: email,
             product: pendingProduct || '',
-            language: document.documentElement.lang
+            language: document.documentElement.lang,
+            source: 'catalog'
           })
         }).catch(function () {});
         setUnlocked(true);
@@ -781,6 +782,49 @@
 
     gateSync();
     draw();
+  })();
+
+  /* ── contact form (home) ──────────────────────────────── */
+  (function () {
+    var form = document.getElementById('contactForm');
+    if (!form) return;
+    var defaultView = document.getElementById('contactFormDefault');
+    var sentView = document.getElementById('contactFormSent');
+    var err = {
+      en: "Couldn't send it — please email sales@hadete.com directly.",
+      es: 'No pudimos enviarlo — escribinos directo a sales@hadete.com.'
+    };
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (form.querySelector('[name="_honey"]').value) return;
+
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) btn.disabled = true;
+
+      var data = {};
+      Array.prototype.forEach.call(form.elements, function (el) {
+        if (!el.name || el.name === '_honey') return;
+        data[el.name] = el.value;
+      });
+      data.language = document.documentElement.lang;
+
+      fetch('/lead-proxy.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      }).then(function (r) {
+        if (!r.ok) throw new Error('bad status');
+        return r.json();
+      }).then(function (j) {
+        if (!j || !j.ok) throw new Error('not ok');
+        if (defaultView) defaultView.hidden = true;
+        if (sentView) sentView.hidden = false;
+      }).catch(function () {
+        if (btn) btn.disabled = false;
+        window.alert(err[document.documentElement.lang] || err.en);
+      });
+    });
   })();
 
   /* ── boot ─────────────────────────────────────────────── */

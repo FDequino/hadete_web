@@ -157,7 +157,7 @@
   ]
 }
 </script>
-<script defer="" src="../analytics.js?v=20261015"></script>
+<script defer="" src="../analytics.js?v=20261026a"></script>
 <link href="https://hadete.com/es/" hreflang="es" rel="alternate"/><link href="https://hadete.com/" hreflang="en" rel="alternate"/><link href="https://hadete.com/" hreflang="x-default" rel="alternate"/></head>
 <body id="top">
 <a class="skip" data-i18n="skip" href="#main">Ir al contenido</a>
@@ -624,11 +624,9 @@
 </div>
 <div class="c-grid">
 <div class="form-card">
+<div id="contactFormDefault">
 <h3 data-i18n="c.formtitle">Enviar una consulta</h3>
-<form action="https://formsubmit.co/sales@hadete.com" method="POST">
-<input name="_subject" type="hidden" value="New enquiry from hadete.com"/>
-<input name="_captcha" type="hidden" value="false"/>
-<input name="_template" type="hidden" value="table"/>
+<form id="contactForm">
 <input autocomplete="off" name="_honey" style="display:none" tabindex="-1" type="text"/>
 <div class="f-row">
 <label><span data-i18n="f.company">Empresa</span><input autocomplete="organization" name="company" required="" type="text"/></label>
@@ -655,9 +653,14 @@
 <label><span data-i18n="f.msg">Algo más que debamos saber</span><textarea name="message" rows="4"></textarea></label>
 <div class="f-send">
 <button data-i18n="f.send" type="submit">Enviar consulta</button>
-<p class="fallback" data-i18n="f.goes">Llega a sales@hadete.com.</p>
+<p class="fallback" data-i18n="f.goes">Te respondemos dentro de un día hábil.</p>
 </div>
 </form>
+</div>
+<div hidden="" id="contactFormSent">
+<h3 data-i18n="f.sent.h3">Gracias, ya quedó cargado.</h3>
+<p data-i18n="f.sent.p">Te respondemos dentro de un día hábil. También podés escribirnos directo o por WhatsApp.</p>
+</div>
 </div>
 <aside class="c-info">
 <h3 data-i18n="c.writetitle">O escribinos</h3>
@@ -733,7 +736,7 @@
 </div>
 </div>
 </footer>
-<script src="../i18n.js?v=20261015"></script>
-<script defer="" src="../site.js?v=20261026c"></script>
+<script src="../i18n.js?v=20261026a"></script>
+<script defer="" src="../site.js?v=20261026d"></script>
 </body>
 </html>

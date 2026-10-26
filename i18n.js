@@ -405,6 +405,7 @@ window.I18N = {
       "cat.gate.name.label": "Tu nombre",
       "cat.gate.label": "Tu correo",
       "cat.gate.btn": "Desbloquear",
+      "cat.gate.btn.view": "Ver ficha",
       "cat.gate.note": "Solo lo usamos para mandarte las fichas y responder tu consulta.",
       "cat.cta.bar": "Decinos el producto,<br>el volumen y el puerto",
       "cat.doc.title": "Catálogo · 2026"

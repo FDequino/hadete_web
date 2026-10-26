@@ -1145,13 +1145,14 @@ picture{display:contents}
 .cat-proc .cat-grid{margin-top:18px}
 
 /* email gate */
-.cat-gate{margin-top:40px;background:var(--borra);color:var(--arena);padding:34px 0}
+.cat-gate{margin-top:40px;background:var(--borra);color:var(--arena);padding:34px 0;scroll-margin-bottom:170px}
 .cat-gate h2{font-size:25px;font-weight:400;color:var(--paper);max-width:20ch}
 .cat-gate p{margin-top:12px;color:rgba(237,228,214,.86);font-size:15.5px;max-width:46ch}
 .cat-gate label{display:block;font-family:var(--mono);font-size:9.5px;font-weight:500;
   letter-spacing:.14em;text-transform:uppercase;color:var(--terra-lite);
   margin:22px 0 7px}
 .cat-gate-row{display:flex;gap:8px;flex-wrap:wrap}
+.cat-gate-row.cat-gate-row-submit{flex-wrap:nowrap}
 .cat-gate input{flex:1 1 200px;min-width:0;padding:14px;min-height:48px;
   background:rgba(237,228,214,.08);border:1px solid rgba(237,228,214,.34);
   color:var(--paper);font-family:var(--serif);font-size:16px;border-radius:0}

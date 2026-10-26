@@ -686,6 +686,11 @@
           var id = b.getAttribute('data-id');
           if (unlocked) { downloadSheet(id); return; }
           pendingProduct = id;
+          var gateBtn = document.getElementById('catGateBtn');
+          if (gateBtn) {
+            gateBtn.setAttribute('data-i18n', 'cat.gate.btn.view');
+            gateBtn.textContent = tt('cat.gate.btn.view', 'View sheet');
+          }
           var gate = document.getElementById('catGate');
           if (gate) gate.scrollIntoView({ behavior: 'smooth', block: 'center' });
           var mail = document.getElementById('catMail');
@@ -776,7 +781,15 @@
           })
         }).catch(function () {});
         setUnlocked(true);
-        if (pendingProduct) { downloadSheet(pendingProduct); pendingProduct = null; }
+        if (pendingProduct) {
+          downloadSheet(pendingProduct);
+          pendingProduct = null;
+          var gateBtn = document.getElementById('catGateBtn');
+          if (gateBtn) {
+            gateBtn.setAttribute('data-i18n', 'cat.gate.btn');
+            gateBtn.textContent = tt('cat.gate.btn', 'Unlock');
+          }
+        }
       });
     }
 

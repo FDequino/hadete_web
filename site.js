@@ -487,8 +487,8 @@
     var send = document.getElementById('waSend');
     var close = document.getElementById('waClose');
 
-    var DRAFT_EN = 'Hello Hadeté, I am writing from your website. I am interested in:\n\n' +
-                   '· Product:\n· Volume:\n· Destination port:\n\nThank you.';
+    var DRAFT_EN = 'Hi, Hadeté team. I would like a quote for:\n\n' +
+                   '· Product:\n· Volume:\n· Destination port:\n\nThanks.';
 
     function draft() {
       var d = window.I18N && window.I18N.DICT &&

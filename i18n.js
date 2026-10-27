@@ -85,7 +85,7 @@ window.I18N = {
       "wa.hint": "Editá el mensaje si querés y mandalo. Se abre en tu propio WhatsApp.",
       "wa.label": "Tu mensaje",
       "wa.send": "Enviar por WhatsApp",
-      "wa.draft": "Hola Hadeté, les escribo desde el sitio. Me interesa:\n\n· Producto:\n· Volumen:\n· Puerto de destino:\n\nGracias.",
+      "wa.draft": "Hola, equipo de Hadeté. Quiero cotizar esto:\n\n· Producto:\n· Volumen:\n· Puerto de destino:\n\nGracias.",
 
       "br.h1": "La etiqueta es la versión corta del lote.",
       "br.lede": "Hadeté es la marca que usamos cuando el producto llega a la góndola tal como salió de la planta: fraccionado en origen, con la cosecha, el lote y la región impresos al frente y no enterrados en una ficha técnica.",

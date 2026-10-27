@@ -482,7 +482,7 @@
     var panel = document.getElementById('waPanel');
     if (!bubble || !panel) return;
 
-    var NUMBER = '5493515637679';
+    var NUMBER = '5493515902479';
     var text = document.getElementById('waText');
     var send = document.getElementById('waSend');
     var close = document.getElementById('waClose');

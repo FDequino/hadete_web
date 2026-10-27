@@ -74,7 +74,7 @@ cuando cambia una, cambia también su nombre o su carpeta.
    quedar en `hadete.com/`, no dentro de una carpeta. Después, cargar el sitemap en
    Google Search Console.
 3. **Número de WhatsApp**: el botón flotante ya apunta al número real
-   (`5493515637679`, en `site.js`). Si cambia, editarlo ahí.
+   (`5493515902479`, en `site.js`). Si cambia, editarlo ahí.
 4. **SPF, DKIM y DMARC** en el dominio antes de mandar correo en frío. Sin eso, los
    mails a Alemania o Estados Unidos caen en spam y no te enterás.
 

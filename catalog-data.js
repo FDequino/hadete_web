@@ -177,7 +177,7 @@ window.CATALOG = {
       sci: 'Vigna radiata · Cristal, Satén II, Esmeralda',
       key: { en: 'Germination ≥ 92 %', es: 'Germinación ≥ 92 %' },
       bulk: [
-        ['origin', 'Salta · Jujuy · Tucumán', 'Salta · Jujuy · Tucumán'],
+        ['origin', 'Salta · Jujuy · Tucumán · Córdoba', 'Salta · Jujuy · Tucumán · Córdoba'],
         ['germ', '≥ 92 %', '≥ 92 %'],
         ['moisture', '≤ 8 %', '≤ 8 %'],
         ['purity', '≥ 99.5 %', '≥ 99,5 %'],
@@ -185,7 +185,7 @@ window.CATALOG = {
         ['hscode', '0713.31', '0713.31']
       ],
       retail: [
-        ['origin', 'Salta · Jujuy · Tucumán', 'Salta · Jujuy · Tucumán'],
+        ['origin', 'Salta · Jujuy · Tucumán · Córdoba', 'Salta · Jujuy · Tucumán · Córdoba'],
         ['grade', 'Sprouting grade', 'Grado para brotes'],
         ['netweight', '500 g', '500 g'],
         ['unitspercase', 'To confirm', 'A confirmar'],

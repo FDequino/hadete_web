@@ -65,7 +65,7 @@ window.CATALOG = {
       line: 'oils',
       pdf: '/docs/olive-oil.pdf',
       spec: true,
-      img: 'prod-aceite',
+      img: 'prod-aceite-v2',
       alt: { en: 'Bottle of Hadeté extra virgin olive oil', es: 'Botella de aceite de oliva extra virgen Hadeté' },
       name: { en: 'Extra virgin olive oil', es: 'Aceite de oliva extra virgen' },
       sci: 'Olea europaea · Arauco, Arbequina',

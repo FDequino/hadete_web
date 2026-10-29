@@ -65,7 +65,7 @@ window.CATALOG = {
       line: 'oils',
       pdf: '/docs/olive-oil.pdf',
       spec: true,
-      img: 'prod-aceite',
+      img: 'prod-aceite-green',
       alt: { en: 'Bottle of Hadeté extra virgin olive oil', es: 'Botella de aceite de oliva extra virgen Hadeté' },
       name: { en: 'Extra virgin olive oil', es: 'Aceite de oliva extra virgen' },
       sci: 'Olea europaea · Arauco, Arbequina',
@@ -122,14 +122,10 @@ window.CATALOG = {
       alt: { en: 'Pouch of Hadeté sun-dried raisins', es: 'Bolsa de pasas de uva Hadeté secadas al sol' },
       name: { en: 'Sun-dried raisins', es: 'Pasas de uva secadas al sol' },
       sci: 'Vitis vinifera · Flame seedless, Sultanina',
-      /* "planta" is ambiguous in Spanish in a way this context doesn't
-         disambiguate: a Spanish-speaking buyer reads "secado en planta" as
-         an industrial dryer, the opposite of what actually happens.
-         "Secado en la vid" (dried on the vine) doesn't carry that reading. */
-      key: { en: 'Dried on the vine', es: 'Secado en la vid' },
+      key: { en: 'Sun-dried', es: 'Secado al sol' },
       bulk: [
         ['origin', 'San Juan — Tulum and Zonda', 'San Juan — Tulum y Zonda'],
-        ['drying', 'Plant-dried, no added sugar', 'Secado en la vid, sin azúcar agregada'],
+        ['drying', 'Sun-dried, no added sugar', 'Secado al sol, sin azúcar agregada'],
         ['grades', 'Jumbo · Medium · Small', 'Jumbo · Medium · Small'],
         ['bulk', '10 kg cartons', 'Cajas de 10 kg'],
         ['hscode', '0806.20', '0806.20']

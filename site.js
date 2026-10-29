@@ -120,9 +120,9 @@
     },
     /* a new language needs its own row labels and month names here too */
     rows: [
-      { en: 'Extra virgin olive oil', es: 'Aceite de oliva extra virgen', pick: [4, 6], ship: [6, 11] },
-      { en: 'Sun-dried raisins', es: 'Pasas de uva', pick: [2, 4], ship: [4, 9] },
-      { en: 'Mung beans', es: 'Poroto mung', pick: [4, 6], ship: [6, 11] }
+      { en: 'Extra virgin olive oil', es: 'Aceite de oliva extra virgen', pick: [3, 6], ship: [6, 11] },
+      { en: 'Sun-dried raisins', es: 'Pasas de uva', pick: [1, 5], ship: [4, 9] },
+      { en: 'Mung beans', es: 'Poroto mung', pick: [3, 5], ship: [6, 11] }
     ],
     fallback: 'en'
   };

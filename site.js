@@ -749,13 +749,29 @@
       });
     });
 
+    var choiceSection = document.getElementById('catChoice');
+    var browseSection = document.getElementById('catBrowse');
+
+    function selectMode(mode) {
+      state.mode = mode;
+      Array.prototype.forEach.call(document.querySelectorAll('.cat-seg button'), function (o) {
+        o.setAttribute('aria-pressed', String(o.getAttribute('data-mode') === mode));
+      });
+      draw();
+    }
+
     Array.prototype.forEach.call(document.querySelectorAll('.cat-seg button'), function (b) {
+      b.addEventListener('click', function () { selectMode(b.getAttribute('data-mode')); });
+    });
+
+    Array.prototype.forEach.call(document.querySelectorAll('.js-cat-choice'), function (b) {
       b.addEventListener('click', function () {
-        state.mode = b.getAttribute('data-mode');
-        Array.prototype.forEach.call(document.querySelectorAll('.cat-seg button'), function (o) {
-          o.setAttribute('aria-pressed', String(o === b));
-        });
-        draw();
+        selectMode(b.getAttribute('data-mode'));
+        if (choiceSection) choiceSection.hidden = true;
+        if (browseSection) {
+          browseSection.hidden = false;
+          browseSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       });
     });
 
@@ -795,6 +811,21 @@
 
     gateSync();
     draw();
+
+    /* a link can skip straight to one side (?mode=bulk / ?mode=retail);
+       everyone else picks first, like Maniagro's Granel / Marca Privada split */
+    (function initChoice() {
+      var urlMode = null;
+      try { urlMode = new URLSearchParams(location.search).get('mode'); } catch (e) {}
+      if (urlMode === 'bulk' || urlMode === 'retail') {
+        selectMode(urlMode);
+        if (choiceSection) choiceSection.hidden = true;
+        if (browseSection) browseSection.hidden = false;
+      } else {
+        if (choiceSection) choiceSection.hidden = false;
+        if (browseSection) browseSection.hidden = true;
+      }
+    })();
   })();
 
   /* ── contact form (home) ──────────────────────────────── */

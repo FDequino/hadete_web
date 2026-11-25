@@ -1069,6 +1069,15 @@ picture{display:contents}
   letter-spacing:-.02em;max-width:17ch}
 .cat-intro p{margin-top:14px;color:var(--ink-soft);font-size:16px;max-width:56ch}
 
+/* choice gate: pick bulk or private label before the catalogue reveals itself */
+.cat-choice{background:var(--arena);border-bottom:1px solid var(--rule);padding:0 0 30px}
+.cat-choice-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.cat-choice-card{display:block;width:100%;text-align:left;background:#fff;
+  border:1px solid var(--rule);padding:22px 20px;cursor:pointer;font:inherit}
+.cat-choice-card:hover,.cat-choice-card:focus-visible{border-color:var(--terra)}
+.cat-choice-t{display:block;font-size:22px;font-weight:400;color:var(--borra);line-height:1.15}
+.cat-choice-p{display:block;margin-top:8px;font-size:15px;color:var(--ink-soft);line-height:1.5}
+
 /* sticky filter bar */
 .cat-bar{position:sticky;top:0;z-index:50;background:rgba(247,243,236,.97);
   -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-bottom:1px solid var(--rule)}
@@ -1183,6 +1192,7 @@ body.cat-page{padding-bottom:calc(84px + env(safe-area-inset-bottom,0px))}
   .cat-doc{display:block}
   .cat-doc .shell{padding-top:clamp(130px,20vh,170px)}
   .cat-intro{padding-top:34px}
+  .cat-choice-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
   .cat-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
   .cat-ph{aspect-ratio:1}
 }

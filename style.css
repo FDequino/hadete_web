@@ -1061,7 +1061,7 @@ picture{display:contents}
   padding-bottom:8px}
 
 /* intro */
-.cat-intro{background:var(--arena);border-bottom:1px solid var(--rule);
+.cat-intro{background:var(--arena);
   padding:clamp(130px,20vh,170px) 0 30px}
 .cat-eyebrow{display:block;font-family:var(--mono);font-size:10px;font-weight:500;
   letter-spacing:.2em;text-transform:uppercase;color:var(--terra-txt);margin-bottom:14px}
@@ -1070,13 +1070,19 @@ picture{display:contents}
 .cat-intro p{margin-top:14px;color:var(--ink-soft);font-size:16px;max-width:56ch}
 
 /* choice gate: pick bulk or private label before the catalogue reveals itself */
-.cat-choice{background:var(--arena);border-bottom:1px solid var(--rule);padding:0 0 30px}
-.cat-choice-grid{display:grid;grid-template-columns:1fr;gap:14px}
-.cat-choice-card{display:block;width:100%;text-align:left;background:#fff;
-  border:1px solid var(--rule);padding:22px 20px;cursor:pointer;font:inherit}
-.cat-choice-card:hover,.cat-choice-card:focus-visible{border-color:var(--terra)}
-.cat-choice-t{display:block;font-size:22px;font-weight:400;color:var(--borra);line-height:1.15}
-.cat-choice-p{display:block;margin-top:8px;font-size:15px;color:var(--ink-soft);line-height:1.5}
+.cat-choice{background:var(--arena);border-bottom:1px solid var(--rule);padding:0 0 36px}
+.cat-choice-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.cat-choice-card{display:flex;flex-direction:column;width:100%;text-align:left;
+  background:#fff;border:1px solid var(--rule);padding:26px 24px;cursor:pointer;
+  font:inherit;transition:border-color .15s ease,box-shadow .15s ease}
+.cat-choice-card:hover,.cat-choice-card:focus-visible{border-color:var(--terra);
+  box-shadow:0 4px 18px rgba(35,26,22,.08)}
+.cat-choice-t{display:flex;align-items:center;justify-content:space-between;gap:14px;
+  font-size:23px;font-weight:400;color:var(--borra);line-height:1.2}
+.cat-choice-arrow{font-family:var(--mono);font-size:16px;color:var(--terra);
+  transition:transform .15s ease;flex:0 0 auto}
+.cat-choice-card:hover .cat-choice-arrow,.cat-choice-card:focus-visible .cat-choice-arrow{transform:translateX(4px)}
+.cat-choice-p{display:block;margin-top:10px;font-size:15px;color:var(--ink-soft);line-height:1.55}
 
 /* sticky filter bar */
 .cat-bar{position:sticky;top:0;z-index:50;background:rgba(247,243,236,.97);

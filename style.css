@@ -1077,11 +1077,7 @@ picture{display:contents}
   font:inherit;transition:border-color .15s ease,box-shadow .15s ease}
 .cat-choice-card:hover,.cat-choice-card:focus-visible{border-color:var(--terra);
   box-shadow:0 4px 18px rgba(35,26,22,.08)}
-.cat-choice-t{display:flex;align-items:center;justify-content:space-between;gap:14px;
-  font-size:23px;font-weight:400;color:var(--borra);line-height:1.2}
-.cat-choice-arrow{font-family:var(--mono);font-size:16px;color:var(--terra);
-  transition:transform .15s ease;flex:0 0 auto}
-.cat-choice-card:hover .cat-choice-arrow,.cat-choice-card:focus-visible .cat-choice-arrow{transform:translateX(4px)}
+.cat-choice-t{font-size:23px;font-weight:400;color:var(--borra);line-height:1.2}
 .cat-choice-p{display:block;margin-top:10px;font-size:15px;color:var(--ink-soft);line-height:1.55}
 
 /* sticky filter bar */
